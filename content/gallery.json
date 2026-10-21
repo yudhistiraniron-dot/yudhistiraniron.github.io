@@ -1,12 +1,12 @@
 {
   "items": [
     {
-      "title": "Cover Book Demi Nama Baik",
+      "title": "Sampul Buku Sastra Floresa",
       "year": "2026",
-      "image": "/assets/images/depan-tanpa-tulisan-.png",
-      "medium": "Digital Ilustration",
+      "image": "/assets/images/profil.jpg",
+      "medium": "Digital Ink & Color Texture",
       "aspect": "aspect-vertical",
-      "description": "Ilustrasi dan Desain Cover Book Floresa.co, tentang mengungkap kekerasan seksual dalam kultural katolik."
+      "description": "Penerjemahan karya sastra cerpen ke dalam bahasa visual yang eksploratif."
     }
   ]
 }
