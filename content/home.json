@@ -1,22 +1,3 @@
 {
-  "title": "Mengolah Narasi Visual, Komunikasi Kreatif, dan Ingatan Sosial.",
-  "subtitle": "A portfolio of commissioned illustrations, editorial work, and independent visual practice.",
-  "description": "Praktik artistik dan ilustrasi yang berpijak pada latar belakang studi filsafat (IFTK Ledalero), berkarya di media seperti Floresa.co, serta eksplorasi seni rupa mandiri.",
-  "hero_image": "https://via.placeholder.com/1200x800",
-  "showcase_items": [
-    {
-      "title": "Sampul Buku Sastra Floresa",
-      "orientation": "portrait",
-      "image": "https://via.placeholder.com/600x920",
-      "badge": "Literary / Editorial",
-      "description": "Penerjemahan narasi cerpen ke dalam bentuk visual vertikal."
-    },
-    {
-      "title": "Ilustrasi Liputan Isu Agraria",
-      "orientation": "landscape",
-      "image": "https://via.placeholder.com/800x450",
-      "badge": "Editorial Illustration",
-      "description": "Visual header liputan mendalam merespons konflik lahan."
-    }
-  ]
+
 }
