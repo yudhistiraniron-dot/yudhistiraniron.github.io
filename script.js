@@ -8,37 +8,35 @@ async function loadHomeData() {
     if (!response.ok) return;
     const data = await response.json();
 
-    // 1. Render Hero Image (Samping Hero - Portrait 800x1000)
-    const heroImgEl = document.getElementById("home-hero-img") || document.querySelector(".hero-image img");
+    // 1. Render Gambar Utama Hero (Portrait Samping)
+    const heroImgEl = document.getElementById("home-hero-img") || document.querySelector("#hero .hero-featured-image img");
     if (heroImgEl && data.hero_image) {
       heroImgEl.src = data.hero_image;
     }
 
-    // 2. Render Etalase Karya Beranda (Showcase Items)
-    const showcaseContainer = document.getElementById("showcase-container") || document.querySelector(".showcase-grid");
+    // 2. Render 5 Etalase Karya di Bawah Beranda
+    const showcaseContainer = document.getElementById("showcase-container") || document.querySelector("#portfolio-highlights .projects-list");
     if (showcaseContainer && data.showcase_items && data.showcase_items.length > 0) {
-      showcaseContainer.innerHTML = ""; // Bersihkan placeholder 800x1000 / 1200x675
+      showcaseContainer.innerHTML = ""; // Bersihkan placeholder lama
 
       data.showcase_items.forEach((item) => {
-        const card = document.createElement("div");
-        card.className = `showcase-card orientation-${item.orientation || "landscape"}`;
+        const article = document.createElement("article");
+        article.className = `project-card orientation-${item.orientation || "landscape"}`;
 
-        card.innerHTML = `
-          <div class="image-wrapper">
+        article.innerHTML = `
+          <figure>
             <img src="${item.image}" alt="${item.title || "Artwork"}" loading="lazy">
+          </figure>
+          <div class="project-info">
+            ${item.badge ? `<span class="badge">${item.badge}</span>` : ""}
+            ${item.title ? `<h3><a href="portfolio.html">${item.title}</a></h3>` : ""}
+            ${item.description ? `<p class="project-excerpt">${item.description}</p>` : ""}
           </div>
-          ${(item.title || item.badge || item.description) ? `
-            <div class="card-info">
-              ${item.badge ? `<span class="badge">${item.badge}</span>` : ""}
-              ${item.title ? `<h3>${item.title}</h3>` : ""}
-              ${item.description ? `<p>${item.description}</p>` : ""}
-            </div>
-          ` : ""}
         `;
-        showcaseContainer.appendChild(card);
+        showcaseContainer.appendChild(article);
       });
     }
   } catch (error) {
-    console.error("Gagal memuat data home:", error);
+    console.error("Gagal memuat data home.json:", error);
   }
 }
