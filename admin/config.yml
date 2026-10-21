@@ -1,85 +1,65 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: yudhistiraniron-dot/yudhistiraniron.github.io
   branch: main
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
 collections:
-  # 1. PENGATURAN HALAMAN HOME (SINGLE FILE)
-  - name: "home"
-    label: "Halaman Home"
-    files:
-      - file: "content/home.json"
-        label: "Edit Teks & Foto Utama Home"
-        name: "home_settings"
-        fields:
-          - { label: "Judul Utama", name: "title", widget: "string", description: "Judul besar di bagian hero." }
-          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", description: "Teks tagline di atas judul." }
-          - { label: "Teks Ringkasan Singkat", name: "about_summary", widget: "text", description: "Deskripsi narasi singkat di halaman depan." }
-          - { label: "Teks Tombol Utama", name: "button_text", widget: "string", description: "Teks tombol aksi utama." }
-          - { label: "Foto Utama (Hero Image)", name: "hero_image", widget: "image", description: "Foto karya/profil di bagian hero." }
+  - label: "Halaman Utama"
+    name: "home"
+    file: "content/home.json"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Deskripsi Singkat", name: "description", widget: "text" }
 
-  # 2. PORTOFOLIO (1 FILE JSON UTUH DENGAN LIST)
-  - name: "portfolio_page"
-    label: "Portofolio Utama"
-    files:
-      - file: "content/portfolio.json"
-        label: "Daftar Proyek Portofolio"
-        name: "portfolio_data"
+  - label: "Galeri Karya"
+    name: "gallery"
+    file: "content/gallery.json"
+    fields:
+      - label: "Daftar Karya Galeri"
+        name: "items"
+        widget: "list"
         fields:
-          - label: "Daftar Proyek"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Judul Proyek / Karya", name: "title", widget: "string", description: "Nama proyek atau pameran." }
-              - { label: "Kategori Proyek", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"], description: "Pilih kategori proyek." }
-              - { label: "Tahun", name: "year", widget: "string", description: "Contoh: 2026" }
-              - { label: "Gambar Sampul (Thumbnail)", name: "thumbnail", widget: "image", description: "Gambar yang muncul di daftar kartu." }
-              - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text", description: "Ringkasan 1-2 kalimat untuk pratinjau kartu." }
+          - { label: "Judul Karya", name: "title", widget: "string" }
+          - label: "Tahun"
+            name: "year"
+            widget: "select"
+            options: ["2026", "2025", "2024", "2023", "2022", "2021", "2020"]
+          - label: "Media / Teknik"
+            name: "media"
+            widget: "select"
+            options: ["Sketsa / Pensil", "Cat Minyak", "Cat Akrilik", "Digital Illustration", "Cetak Grafis / Print", "Instalasi / Mixed Media", "Lainnya"]
+          - label: "Format Ukuran"
+            name: "orientation"
+            widget: "select"
+            options: ["landscape", "portrait", "square"]
+            default: "landscape"
+          - { label: "Gambar Karya", name: "image", widget: "image" }
+          - { label: "Deskripsi", name: "description", widget: "text", required: false }
 
-  # 3. ARSIP GALERI (1 FILE JSON UTUH DENGAN LIST)
-  - name: "gallery_page"
-    label: "Arsip Galeri"
-    files:
-      - file: "content/gallery.json"
-        label: "Daftar Karya Galeri"
-        name: "gallery_data"
+  - label: "Portofolio Utama"
+    name: "portfolio"
+    file: "content/portfolio.json"
+    fields:
+      - label: "Daftar Karya Pilihan"
+        name: "items"
+        widget: "list"
         fields:
-          - label: "Daftar Karya"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Judul Karya Visual", name: "title", widget: "string", description: "Judul lukisan/ilustrasi." }
-              - { label: "Tahun Dibuat", name: "year", widget: "string", description: "Contoh: 2026" }
-              - { label: "File Gambar Utama", name: "image", widget: "image", description: "Unggah file resolusi tinggi untuk galeri." }
-              - { label: "Media / Teknik", name: "medium", widget: "string", description: "Contoh: Digital Illustration / Ink on Paper" }
-              - { label: "Proporsi (Aspect Ratio)", name: "aspect", widget: "select", options: ["aspect-square", "aspect-vertical", "aspect-landscape"], description: "Pilih bentuk orientasi gambar." }
-              - { label: "Catatan / Deskripsi Karya", name: "description", widget: "text", description: "Penjelasan singkat latar belakang karya." }
-
-  # 4. PENGATURAN HALAMAN ABOUT (SINGLE FILE)
-  - name: "about"
-    label: "Halaman About"
-    files:
-      - file: "content/about.json"
-        label: "Edit Bio & Profil About"
-        name: "about_settings"
-        fields:
-          - { label: "Judul Halaman", name: "title", widget: "string", description: "Judul utama halaman About." }
-          - { label: "Foto Profil Seniman", name: "artist_image", widget: "image", description: "Foto Anda yang muncul di halaman About." }
-          - { label: "Biografi Lengkap", name: "bio", widget: "markdown", description: "Narasi perjalanan dan latar belakang Anda." }
-          - { label: "Artist Statement", name: "statement", widget: "markdown", description: "Pernyataan kekaryaan / pendekatan artistik Anda." }
-
-  # 5. PENGATURAN HALAMAN CV (SINGLE FILE)
-  - name: "cv"
-    label: "Halaman CV"
-    files:
-      - file: "content/cv.json"
-        label: "Edit Isi Kurikulum Vitae"
-        name: "cv_settings"
-        fields:
-          - { label: "Pendidikan & Akademik", name: "education", widget: "markdown", description: "Riwayat pendidikan formal." }
-          - { label: "Pameran & Ekshibisi", name: "exhibitions", widget: "markdown", description: "Daftar pameran." }
-          - { label: "Publikasi & Karya Tulis", name: "publications", widget: "markdown", description: "Daftar tulisan atau cerpen." }
-          - { label: "Pengalaman & Kolektif", name: "experience", widget: "markdown", description: "Pengalaman organisasi atau proyek riset." }
-          - { label: "File PDF CV Lengkap", name: "cv_pdf", widget: "file", required: false, description: "Unggah file PDF CV jika ada." }
+          - { label: "Judul Karya", name: "title", widget: "string" }
+          - label: "Tahun"
+            name: "year"
+            widget: "select"
+            options: ["2026", "2025", "2024", "2023", "2022", "2021", "2020"]
+          - label: "Media / Teknik"
+            name: "media"
+            widget: "select"
+            options: ["Sketsa / Pensil", "Cat Minyak", "Cat Akrilik", "Digital Illustration", "Cetak Grafis / Print", "Instalasi / Mixed Media", "Lainnya"]
+          - label: "Format Ukuran"
+            name: "orientation"
+            widget: "select"
+            options: ["landscape", "portrait", "square"]
+            default: "landscape"
+          - { label: "Gambar Karya", name: "image", widget: "image" }
+          - { label: "Deskripsi", name: "description", widget: "text", required: false }
