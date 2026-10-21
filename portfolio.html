@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Efraim Yudhistira Niron</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION HEADER -->
+  <header>
+    <div class="brand">
+      <a href="index.html">
+        <h1>EFRAIM YUDHISTIRA NIRON</h1>
+        <p>Illustrator · Visual Artist</p>
+      </a>
+    </div>
+
+    <div class="nav-wrapper">
+      <button type="button" aria-label="Buka Menu Navigasi">Menu</button>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="cv.html">CV</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section id="page-header">
+      <h1>Portfolio & Proyek Terkurasi</h1>
+      <p>Kumpulan studi kasus ilustrasi editorial, penerbitan buku, dan proyek kolaborasi visual pilihan.</p>
+      
+      <!-- NAVIGASI FILTER KATEGORI -->
+      <div class="category-filters">
+        <span>Filter:</span>
+        <button type="button" class="filter-btn active" data-filter="all">Semua Proyek</button>
+        <button type="button" class="filter-btn" data-filter="editorial">Editorial Illustration (Floresa)</button>
+        <button type="button" class="filter-btn" data-filter="literary">Literary & Book Cover</button>
+        <button type="button" class="filter-btn" data-filter="independent">Independent Visual Projects</button>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- PROJECTS LIST / CASE STUDIES -->
+    <section id="projects-container">
+
+      <!-- PROYEK 1: Seri Editorial Floresa -->
+      <article class="project-item" data-category="editorial">
+        <div class="project-media">
+          <figure>
+            <img src="https://via.placeholder.com/1200x675" alt="Ilustrasi Liputan Mendalam Floresa">
+            <figcaption>Format Aspect Ratio 16:9 — Visual Header Liputan</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-details">
+          <span class="badge">Editorial Illustration</span>
+          <h2>Seri Ilustrasi Liputan Isu Agraria & Sosial</h2>
+          
+          <ul class="project-meta">
+            <li><strong>Klien / Media:</strong> Floresa.co</li>
+            <li><strong>Tahun:</strong> 2025 – 2026</li>
+            <li><strong>Peran:</strong> Illustrator & Co-Researcher</li>
+            <li><strong>Medium:</strong> Digital Drawing / Mixed Technique</li>
+          </ul>
+
+          <div class="project-description">
+            <p>
+              Rangkaian ilustrasi editorial yang dibuat khusus untuk merespons laporan investigasi dan berita mendalam media Floresa. Mengangkat tema keberlanjutan lingkungan, ruang hidup, dan suara komunitas lokal di Flores.
+            </p>
+          </div>
+
+          <a href="#" class="btn-read-more">Lihat Studi Kasus Proyek Lengkap (&rarr;)</a>
+        </div>
+      </article>
+
+      <hr>
+
+      <!-- PROYEK 2: Sampul Buku / Publisher -->
+      <article class="project-item" data-category="literary">
+        <div class="project-media">
+          <figure>
+            <img src="https://via.placeholder.com/600x920" alt="Ilustrasi Sampul Buku Floresa">
+            <figcaption>Format Vertikal (Proporsi Sampul Buku 3324 × 5097 px)</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-details">
+          <span class="badge">Literary Illustration & Publishing</span>
+          <h2>Sampul Buku & Ilustrasi Cerita Pendek Floresa</h2>
+          
+          <ul class="project-meta">
+            <li><strong>Penerbit / Media:</strong> Floresa Editorial / Penerbit Independen</li>
+            <li><strong>Tahun:</strong> 2026</li>
+            <li><strong>Peran:</strong> Cover Artist & Interior Illustrator</li>
+            <li><strong>Medium:</strong> Digital Ink & Color Texture</li>
+          </ul>
+
+          <div class="project-description">
+            <p>
+              Penerjemahan karya sastra cerpen ke dalam bahasa visual yang eksploratif. Menggabungkan unsur naratif, simbolisme budaya, serta tekstur fisik dalam format sampul cetak.
+            </p>
+          </div>
+
+          <a href="#" class="btn-read-more">Lihat Detail Sampul & Ilustrasi Isi (&rarr;)</a>
+        </div>
+      </article>
+
+      <hr>
+
+      <!-- PROYEK 3: Proyek Independen -->
+      <article class="project-item" data-category="independent">
+        <div class="project-media">
+          <figure>
+            <img src="https://via.placeholder.com/800x800" alt="Seri Karya Seni Independen">
+            <figcaption>Format Aspect Ratio 1:1 (Persegi)</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-details">
+          <span class="badge">Independent Visual Project</span>
+          <h2>Eksplorasi Realisme Sosial & Ingatan Kolektif</h2>
+          
+          <ul class="project-meta">
+            <li><strong>Inisiatif:</strong> Proyek Mandiri / Riset Visual</li>
+            <li><strong>Tahun:</strong> 2025</li>
+            <li><strong>Peran:</strong> Visual Artist</li>
+            <li><strong>Medium:</strong> Pen, Ink, & Digital Process</li>
+          </ul>
+
+          <div class="project-description">
+            <p>
+              Proyek refleksi personal mengenai sejarah lisan, situs ingatan, dan dinamika sosial masyarakat. Ditampilkan dalam bentuk seri karya visual terbatas.
+            </p>
+          </div>
+
+          <a href="#" class="btn-read-more">Lihat Seri Karya Lengkap (&rarr;)</a>
+        </div>
+      </article>
+
+    </section>
+
+    <hr>
+
+    <!-- SECTION: INFORMASI PROFESIONAL, FOTO PROFIL, ICON TOOL & KONTAK -->
+    <section id="portfolio-contact-info" style="padding: 2.5rem 0;">
+      <div style="margin-bottom: 2rem;">
+        <span class="badge">Informasi Profesional & Kontak</span>
+        <h2>Bekerja Sama & Berkolaborasi</h2>
+      </div>
+
+      <div class="portfolio-info-grid">
+        
+        <!-- KOLOM 1: FOTO PROFIL & TOOL ICONS -->
+        <div>
+          <figure style="background-color: var(--bg-surface); border: 1px solid var(--border-sand-muted); padding: 0.4rem; margin-bottom: 1.25rem;">
+            <img src="images d icon/profil.jpg" alt="Efraim Yudhistira Niron" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover;">
+            <figcaption style="font-size: 0.75rem; text-align: center; color: var(--color-accent-gold); margin-top: 0.4rem;">Efraim Yudhistira Niron</figcaption>
+          </figure>
+
+          <div style="background-color: var(--bg-surface); border: 1px solid var(--border-sand-muted); padding: 1rem;">
+            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.6rem;">Tools / Perangkat</h4>
+            
+            <div class="tool-icons-grid">
+              <img src="images d icon/Clipstudiopaint.png" alt="Clip Studio Paint" title="Clip Studio Paint">
+              <img src="images d icon/photoshop.png" alt="Adobe Photoshop" title="Adobe Photoshop">
+              <img src="images d icon/illustrator.png" alt="Adobe Illustrator" title="Adobe Illustrator">
+              <img src="images d icon/after-effects.png" alt="Adobe After Effects" title="Adobe After Effects">
+              <img src="images d icon/premiere-pro.png" alt="Adobe Premiere Pro" title="Adobe Premiere Pro">
+              <img src="images d icon/lightroom.png" alt="Adobe Lightroom" title="Adobe Lightroom">
+            </div>
+          </div>
+        </div>
+
+        <!-- KOLOM 2: ARTIST STATEMENT & KLIEN -->
+        <div>
+          <div style="margin-bottom: 2rem;">
+            <h3 style="color: var(--color-accent-gold); font-size: 1.1rem; margin-bottom: 0.75rem;">Pernyataan Artis (Artist Statement)</h3>
+            <p style="font-size: 0.9rem; line-height: 1.7;">
+              "Perupa visual dan ilustrator berbasis filsafat yang berfokus pada pendekatan realisme sosial, narasi editorial, dan ingatan kolektif. Selain ilustrasi, saya juga berpengalaman dalam pengolahan video dan desain media digital untuk kebutuhan publikasi komprehensif."
+            </p>
+          </div>
+
+          <div>
+            <h3 style="color: var(--color-accent-gold); font-size: 1.1rem; margin-bottom: 0.75rem;">Klien & Rekam Jejak Pameran</h3>
+            <ul style="list-style: none; font-size: 0.85rem; line-height: 1.8; color: var(--color-sand);">
+              <li>• <strong>Floresa.co</strong> — Ilustrator Editorial & Cerpen</li>
+              <li>• <strong>StART Exhibition: The City of Stone</strong> — Seniman Pengkarya</li>
+              <li>• <strong>Flobamora Film Festival</strong> — Produser Naskah Terpilih</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- KOLOM 3: KONTAK BISNIS & MEDIA SOSIAL -->
+        <div style="background-color: var(--bg-surface); border: 1px solid var(--border-sand-muted); padding: 2rem;">
+          <h3 style="color: var(--color-accent-gold); font-size: 1.1rem; margin-bottom: 1rem;">Kontak Langsung</h3>
+          <p style="font-size: 0.85rem; color: var(--color-sand); margin-bottom: 1.25rem;">
+            Terbuka untuk pesanan ilustrasi editorial, sampul buku, dan proyek visual.
+          </p>
+
+          <ul style="list-style: none; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.8rem;">
+            <li>
+              <strong style="color: var(--color-warm-ivory);">Email:</strong><br>
+              <a href="mailto:yudhistiraniron@gmail.com" style="color: var(--color-accent-gold); text-decoration: underline;">yudhistiraniron@gmail.com</a>
+            </li>
+            <li>
+              <strong style="color: var(--color-warm-ivory);">WhatsApp:</strong><br>
+              <a href="https://wa.me/628123683316" target="_blank" rel="noopener" style="color: var(--color-accent-gold); text-decoration: underline;">+62 812-3683-316</a>
+            </li>
+            <li>
+              <strong style="color: var(--color-warm-ivory);">Instagram:</strong><br>
+              <a href="https://instagram.com/piel_xo" target="_blank" rel="noopener" style="color: var(--color-accent-gold); text-decoration: underline;">@piel_xo</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <!-- FOOTER -->
+
+    <div class="footer-copyright">
+      <p>&copy; 2026 Efraim Yudhistira Niron. Hak Cipta Dilindungi.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

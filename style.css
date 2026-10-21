@@ -1,0 +1,500 @@
+/* ==========================================================================
+   EFRAIM YUDHISTIRA NIRON — CLEAN MONOLINGUAL CSS
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+
+
+:root {
+  /* PALET WARNA EDITORIAL */
+  --bg-header: #120e0e;          /* Black Charcoal Pekat khusus Header */
+  --bg-deep-charcoal: #181818;   /* Latar Utama Halaman / Body */
+  --bg-surface: #261717;         /* Latar Kartu / Blok Konten */
+  --bg-footer: #211215;          /* Dark Wine / Burgundy Pekat khusus Footer */
+  
+  --color-burgundy: #810B38;     /* Aksen utama tombol */
+  --color-accent-gold: #C29B38;  /* Aksen Emas Redup (Judul & Garis Pembatas) */
+  --color-warm-ivory: #F5EBE0;   /* Teks Utama */
+  --color-sand: #DCC3AA;         /* Teks Sekunder */
+  
+  --border-sand-muted: rgba(220, 195, 170, 0.25);
+  --border-sand-faint: rgba(220, 195, 170, 0.1);
+
+  --font-display: 'Newsreader', Georgia, serif; 
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --site-max-width: 1280px;
+  --radius-sm: 3px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-deep-charcoal);
+  color: var(--color-warm-ivory);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-sand-muted);
+  margin: 3.5rem 0;
+}
+
+main {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 0;
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-warm-ivory);
+}
+
+h1 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+h2 { font-size: clamp(1.35rem, 2.5vw, 2.1rem); }
+h3 { font-size: clamp(1.1rem, 1.8vw, 1.4rem); }
+
+p {
+  color: var(--color-warm-ivory);
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.7rem;
+  background-color: var(--color-burgundy);
+  color: var(--color-warm-ivory);
+  border-left: 2px solid var(--color-accent-gold);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+}
+
+.btn-primary, .btn-read-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.25rem;
+  background-color: var(--color-burgundy);
+  color: var(--color-warm-ivory);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-primary:hover, .btn-read-more:hover {
+  background-color: var(--color-accent-gold);
+  color: var(--bg-deep-charcoal);
+  border-color: var(--color-accent-gold);
+}
+
+/* 1. HEADER & NAVIGATION (WARNA KHUSUS: BLACK CHARCOAL) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--color-accent-gold);
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand a h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-warm-ivory);
+}
+
+.brand a p {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--color-accent-gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 0;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+  padding: 0.3rem 0;
+  position: relative;
+}
+
+nav a:hover, nav a.active {
+  color: var(--color-warm-ivory);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-accent-gold);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after, nav a.active::after {
+  width: 100%;
+}
+
+button[aria-label="Buka Menu Navigasi"] {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-sand-muted);
+  color: var(--color-warm-ivory);
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* LAYOUT SECTIONS */
+#hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  padding: 2.5rem 0;
+}
+
+#hero .tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-accent-gold);
+  margin-bottom: 1.2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-featured-image figure,
+.project-card,
+.gallery-card,
+.gallery-preview-grid figure,
+.about-sidebar .artist-portrait,
+.project-media figure,
+#home-about {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-sand-muted);
+  transition: border-color 0.3s ease;
+}
+
+.hero-featured-image figure:hover,
+.project-card:hover,
+.gallery-card:hover {
+  border-color: var(--color-accent-gold);
+}
+
+.hero-featured-image figure { padding: 0.5rem; }
+.hero-featured-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+figcaption {
+  font-size: 0.78rem;
+  color: var(--color-sand);
+  margin-top: 0.6rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.section-header a {
+  color: var(--color-accent-gold);
+  font-size: 0.825rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.projects-list { display: flex; flex-direction: column; gap: 2.5rem; }
+
+.project-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 1.25rem;
+}
+
+.project-card figure img { width: 100%; aspect-ratio: 16 / 9; }
+
+.gallery-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-preview-grid figure { padding: 0.5rem; }
+
+.aspect-vertical img { aspect-ratio: 3324 / 5097; }
+.aspect-square img { aspect-ratio: 1 / 1; }
+.aspect-landscape img { aspect-ratio: 16 / 9; }
+
+#page-header { padding: 2rem 0; }
+
+.category-filters, .gallery-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid var(--border-sand-muted);
+  color: var(--color-sand);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--color-burgundy);
+  color: var(--color-warm-ivory);
+  border-color: var(--color-accent-gold);
+}
+
+.project-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  padding: 2rem 0;
+}
+
+.project-meta {
+  list-style: none;
+  margin: 1.25rem 0;
+  border-top: 1px solid var(--border-sand-faint);
+  border-bottom: 1px solid var(--border-sand-faint);
+  padding: 0.85rem 0;
+}
+
+.project-meta li { font-size: 0.825rem; color: var(--color-sand); margin-bottom: 0.3rem; }
+
+.gallery-section { margin: 2.5rem 0; }
+
+.section-title {
+  font-size: 1rem;
+  color: var(--color-accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+  border-left: 2px solid var(--color-accent-gold);
+  padding-left: 0.75rem;
+}
+
+.grid-portrait { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-landscape { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+.gallery-card { padding: 0.5rem; display: flex; flex-direction: column; cursor: pointer; }
+
+.card-media img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .card-media img { transform: scale(1.04); }
+
+.card-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  font-weight: 600;
+}
+
+.lightbox-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(18, 12, 12, 0.96);
+  z-index: 2000;
+  display: flex; justify-content: center; align-items: center;
+  padding: 1.5rem;
+}
+
+.modal-content {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--color-accent-gold);
+  max-width: 1050px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  position: relative; padding: 2.5rem;
+}
+
+.close-modal {
+  position: absolute; top: 1.25rem; right: 1.5rem;
+  background: none; border: none;
+  color: var(--color-accent-gold);
+  font-size: 1.25rem; cursor: pointer;
+}
+
+.modal-body { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; }
+.modal-image-container img { max-height: 70vh; width: auto; margin: 0 auto; }
+
+.artist-note {
+  background-color: var(--bg-deep-charcoal);
+  padding: 1.25rem;
+  border-left: 2px solid var(--color-accent-gold);
+  margin: 1.25rem 0;
+}
+
+#about-container { display: grid; grid-template-columns: 280px 1fr; gap: 3.5rem; padding: 2rem 0; }
+.about-sidebar .artist-portrait { padding: 0.5rem; margin-bottom: 1.5rem; }
+.quick-info h3 { font-size: 0.9rem; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 1rem; }
+.quick-info ul { list-style: none; }
+.quick-info li { font-size: 0.825rem; margin-bottom: 0.6rem; color: var(--color-sand); }
+
+.bio-block { margin-bottom: 2.5rem; }
+.bio-block h2 { margin-bottom: 1rem; border-bottom: 1px solid var(--border-sand-faint); padding-bottom: 0.5rem; color: var(--color-accent-gold); }
+
+.cv-section h2 { font-size: 1.2rem; color: var(--color-accent-gold); text-transform: uppercase; margin-bottom: 1.25rem; }
+.cv-item { display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.cv-date { font-size: 0.825rem; color: var(--color-accent-gold); font-weight: 500; }
+.institution { font-size: 0.85rem; color: var(--color-sand); font-style: italic; margin-bottom: 0.4rem; }
+.cv-bullet-list { margin-left: 1.2rem; font-size: 0.85rem; }
+
+/* 2. FOOTER (WARNA KHUSUS: DARK WINE) */
+footer {
+  background-color: var(--bg-footer);
+  border-top: 2px solid var(--color-accent-gold);
+  padding: 3.5rem 1.5rem 1.5rem;
+  margin-top: 5rem;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+footer h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.85rem; }
+footer ul { list-style: none; }
+footer li { margin-bottom: 0.4rem; font-size: 0.825rem; }
+.footer-copyright { grid-column: 1 / -1; border-top: 1px solid var(--border-sand-faint); padding-top: 1.25rem; font-size: 0.725rem; color: var(--color-sand); text-align: center; }
+
+#home-about { padding: 3rem; margin: 4rem 0; }
+.home-about-grid { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: center; }
+.home-about-avatar figure { padding: 0.4rem; background-color: var(--bg-deep-charcoal); border: 1px solid var(--border-sand-muted); }
+
+
+/* Styling Grid Kontak & Profil di Halaman Portfolio */
+.portfolio-info-grid {
+  display: grid;
+  grid-template-columns: 260px 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Styling Ikon Tools (CSP, PS, dll) */
+.tool-icons-grid {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.tool-icons-grid img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.tool-icons-grid img:hover {
+  filter: grayscale(0%);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .portfolio-info-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+
+@media (max-width: 900px) {
+  #hero, .project-card, .project-item, #about-container, .modal-body, .footer-container, .home-about-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 600px) {
+  main { padding: 1rem 1rem 0; }
+  header { padding: 0.85rem 1rem; }
+  nav ul { display: none; }
+  button[aria-label="Buka Menu Navigasi"] { display: block; }
+  .gallery-preview-grid, .grid-portrait, .grid-landscape { grid-template-columns: 1fr; }
+  .cv-item { grid-template-columns: 1fr; gap: 0.2rem; }
+}
