@@ -5,31 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Efraim Yudhistira Niron — Illustrator & Visual Artist</title>
   <link rel="stylesheet" href="style.css">
-  <script>
-  // Mengambil data dari CMS yang tersimpan di content/home.json
-  fetch('/content/home.json')
-    .then(response => response.json())
-    .then(data => {
-      // Memperbarui judul & tagline jika ada
-      if (data.title) {
-        const titleEl = document.querySelector('.hero-title, h1');
-        if (titleEl) titleEl.textContent = data.title;
-      }
-      
-      // Memperbarui Foto Profil / Highlight
-      if (data.hero_image) {
-        const imgEl = document.querySelector('.hero-img, .profile-img, img');
-        if (imgEl) imgEl.src = data.hero_image;
-      }
-
-      // Memperbarui Ringkasan Bio / Profil
-      if (data.about_summary) {
-        const bioEl = document.querySelector('.hero-bio, .about-summary');
-        if (bioEl) bioEl.innerHTML = data.about_summary;
-      }
-    })
-    .catch(err => console.log('Belum ada data custom CMS:', err));
-</script>
+  <script src="/script.js"></script>
 </head>
 <body>
 
@@ -167,7 +143,7 @@
         <!-- Kolom Foto Profil Mini -->
         <div class="home-about-avatar">
           <figure>
-            <img src="https://via.placeholder.com/400x500" alt="Efraim Yudhistira Niron">
+            <img src="images d icon/profil.jpg" alt="Efraim Yudhistira Niron">
             <figcaption>Yudhistira Niron.</figcaption>
           </figure>
         </div>
