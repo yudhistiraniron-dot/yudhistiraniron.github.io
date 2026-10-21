@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  branch: main # Ganti dengan 'master' jika branch utama GitHub Anda bernama master
+
+media_folder: "assets" # Tempat menyimpan foto yang diunggah dari CMS
+public_folder: "assets"
+
+collections:
+  - name: "gallery"
+    label: "Arsip Galeri"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul Karya", name: "title", widget: "string" }
+      - { label: "Tahun & Medium", name: "meta", widget: "string", default: "2026 · Digital Ink" }
+      - { 
+          label: "Kategori", 
+          name: "category", 
+          widget: "select", 
+          options: [
+            { label: "Personal & Refleksi", value: "personal" },
+            { label: "Seni Sosial & Riset", value: "social" },
+            { label: "Editorial Archive", value: "editorial" }
+          ] 
+        }
+      - { label: "Unggah Foto Karya", name: "image", widget: "image" }
+      - { label: "Deskripsi / Catatan Seniman", name: "description", widget: "text" }
