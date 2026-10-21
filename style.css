@@ -4,7 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
 
-
+/* Memastikan tombol menu HP selalu bisa diklik di atas elemen lain */
+.menu-toggle, .hamburger, nav {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
 
 :root {
   /* PALET WARNA EDITORIAL */

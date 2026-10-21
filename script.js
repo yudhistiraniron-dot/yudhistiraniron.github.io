@@ -133,101 +133,103 @@ document.addEventListener("DOMContentLoaded", function () {
     img.setAttribute("draggable", "false");
     img.addEventListener("contextmenu", e => e.preventDefault());
   });
-// ==========================================
-// PENGHUBUNG DATA CMS KE TAMPILAN WEB
-// ==========================================
 
-// 1. PENGHUBUNG GALERI (gallery.html & preview di index.html)
-const galleryGrid = document.querySelector('.gallery-preview-grid, .gallery-grid');
-if (galleryGrid) {
-  fetch('/content/gallery/index.json')
-    .then(res => res.json())
-    .then(karyaList => {
-      if (Array.isArray(karyaList) && karyaList.length > 0) {
-        galleryGrid.innerHTML = ''; // Hapus foto placeholder abu-abu bawaan
-        karyaList.forEach(karya => {
-          const figure = document.createElement('figure');
-          figure.className = karya.aspect || 'aspect-square';
-          figure.innerHTML = `
-            <img src="${karya.image}" alt="${karya.title}">
-            <figcaption>${karya.title} — ${karya.medium || ''} (${karya.year || ''})</figcaption>
-          `;
-          galleryGrid.appendChild(figure);
-        });
-      }
-    })
-    .catch(err => console.log('CMS Galeri belum ada data:', err));
-}
+  /* --------------------------------------------------------------------------
+     5. PENGHUBUNG DATA CMS KE TAMPILAN WEB
+     -------------------------------------------------------------------------- */
 
-// 2. PENGHUBUNG PORTOFOLIO (portfolio.html)
-const portfolioGrid = document.querySelector('.portfolio-grid, .projects-list');
-if (portfolioGrid) {
-  fetch('/content/portfolio/index.json')
-    .then(res => res.json())
-    .then(proyekList => {
-      if (Array.isArray(proyekList) && proyekList.length > 0) {
-        portfolioGrid.innerHTML = '';
-        proyekList.forEach(item => {
-          const card = document.createElement('article');
-          card.className = 'portfolio-card';
-          card.innerHTML = `
-            <img src="${item.thumbnail}" alt="${item.title}">
-            <div class="card-body">
-              <span class="category">${item.category || ''} · ${item.year || ''}</span>
-              <h3>${item.title}</h3>
-              <p>${item.excerpt || ''}</p>
-            </div>
-          `;
-          portfolioGrid.appendChild(card);
-        });
-      }
-    })
-    .catch(err => console.log('CMS Portofolio belum ada data:', err));
-}
+  // A. PENGHUBUNG GALERI (gallery.html & preview di index.html)
+  const galleryGrid = document.querySelector('.gallery-preview-grid, .gallery-grid');
+  if (galleryGrid) {
+    fetch('/content/gallery/index.json')
+      .then(res => res.json())
+      .then(karyaList => {
+        if (Array.isArray(karyaList) && karyaList.length > 0) {
+          galleryGrid.innerHTML = '';
+          karyaList.forEach(karya => {
+            const figure = document.createElement('figure');
+            figure.className = karya.aspect || 'aspect-square';
+            figure.innerHTML = `
+              <img src="${karya.image}" alt="${karya.title}">
+              <figcaption>${karya.title} — ${karya.medium || ''} (${karya.year || ''})</figcaption>
+            `;
+            galleryGrid.appendChild(figure);
+          });
+        }
+      })
+      .catch(err => console.log('CMS Galeri belum ada data:', err));
+  }
 
-// 3. PENGHUBUNG HALAMAN ABOUT (about.html)
-if (window.location.pathname.includes('about')) {
-  fetch('/content/about.json')
-    .then(res => res.json())
-    .then(data => {
-      if (data.artist_image) {
-        const img = document.querySelector('.about-image img');
-        if (img) img.src = data.artist_image;
-      }
-      if (data.bio) {
-        const bioEl = document.querySelector('.about-bio');
-        if (bioEl) bioEl.innerHTML = data.bio;
-      }
-      if (data.statement) {
-        const stmtEl = document.querySelector('.about-statement');
-        if (stmtEl) stmtEl.innerHTML = data.statement;
-      }
-    })
-    .catch(err => console.log('CMS About belum ada data:', err));
-}
+  // B. PENGHUBUNG PORTOFOLIO (portfolio.html)
+  const portfolioGrid = document.querySelector('.portfolio-grid, .projects-list');
+  if (portfolioGrid) {
+    fetch('/content/portfolio/index.json')
+      .then(res => res.json())
+      .then(proyekList => {
+        if (Array.isArray(proyekList) && proyekList.length > 0) {
+          portfolioGrid.innerHTML = '';
+          proyekList.forEach(item => {
+            const card = document.createElement('article');
+            card.className = 'portfolio-card';
+            card.innerHTML = `
+              <img src="${item.thumbnail}" alt="${item.title}">
+              <div class="card-body">
+                <span class="category">${item.category || ''} · ${item.year || ''}</span>
+                <h3>${item.title}</h3>
+                <p>${item.excerpt || ''}</p>
+              </div>
+            `;
+            portfolioGrid.appendChild(card);
+          });
+        }
+      })
+      .catch(err => console.log('CMS Portofolio belum ada data:', err));
+  }
 
-// 4. PENGHUBUNG HALAMAN CV (cv.html)
-if (window.location.pathname.includes('cv')) {
-  fetch('/content/cv.json')
-    .then(res => res.json())
-    .then(data => {
-      if (data.education) {
-        const edu = document.querySelector('.cv-education');
-        if (edu) edu.innerHTML = data.education;
-      }
-      if (data.exhibitions) {
-        const ex = document.querySelector('.cv-exhibitions');
-        if (ex) ex.innerHTML = data.exhibitions;
-      }
-      if (data.publications) {
-        const pub = document.querySelector('.cv-publications');
-        if (pub) pub.innerHTML = data.publications;
-      }
-      if (data.experience) {
-        const exp = document.querySelector('.cv-experience');
-        if (exp) exp.innerHTML = data.experience;
-      }
-    })
-    .catch(err => console.log('CMS CV belum ada data:', err));
-}
-});
+  // C. PENGHUBUNG HALAMAN ABOUT (about.html)
+  if (window.location.pathname.includes('about')) {
+    fetch('/content/about.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.artist_image) {
+          const img = document.querySelector('.about-image img');
+          if (img) img.src = data.artist_image;
+        }
+        if (data.bio) {
+          const bioEl = document.querySelector('.about-bio');
+          if (bioEl) bioEl.innerHTML = data.bio;
+        }
+        if (data.statement) {
+          const stmtEl = document.querySelector('.about-statement');
+          if (stmtEl) stmtEl.innerHTML = data.statement;
+        }
+      })
+      .catch(err => console.log('CMS About belum ada data:', err));
+  }
+
+  // D. PENGHUBUNG HALAMAN CV (cv.html)
+  if (window.location.pathname.includes('cv')) {
+    fetch('/content/cv.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.education) {
+          const edu = document.querySelector('.cv-education');
+          if (edu) edu.innerHTML = data.education;
+        }
+        if (data.exhibitions) {
+          const ex = document.querySelector('.cv-exhibitions');
+          if (ex) ex.innerHTML = data.exhibitions;
+        }
+        if (data.publications) {
+          const pub = document.querySelector('.cv-publications');
+          if (pub) pub.innerHTML = data.publications;
+        }
+        if (data.experience) {
+          const exp = document.querySelector('.cv-experience');
+          if (exp) exp.innerHTML = data.experience;
+        }
+      })
+      .catch(err => console.log('CMS CV belum ada data:', err));
+  }
+
+}); // <-- PENUTUP UTAMA DOMContentLoaded YANG SEBELUMNYA KURANG
