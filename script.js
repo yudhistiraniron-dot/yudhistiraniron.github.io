@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Jalankan pemuatan data sesuai halaman
+  // Jalankan pemuatan data sesuai elemen yang ada di halaman
   if (document.getElementById("gallery-container")) {
     loadGalleryData();
   }
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Fungsi memuat data untuk gallery.html
+// 1. Fungsi memuat data untuk gallery.html
 async function loadGalleryData() {
   const container = document.getElementById("gallery-container");
   if (!container) return;
@@ -20,26 +20,39 @@ async function loadGalleryData() {
     const data = await response.json();
     container.innerHTML = ""; // Bersihkan placeholder
 
-    data.items.forEach((item) => {
+    // Tangani jika data.items ada
+    const items = data.items || data;
+
+    items.forEach((item) => {
       const card = document.createElement("article");
       card.className = "gallery-card";
 
-      // Sesuaikan penentuan kelas orientasi
+      // Penentuan kelas orientasi gambar
       let aspectClass = "aspect-landscape";
       if (item.orientation === "portrait") aspectClass = "aspect-vertical";
       else if (item.orientation === "square") aspectClass = "aspect-square";
 
-      card.innerHTML = `
+      // Gunakan rekomendasi judul AI jika ada, atau gunakan judul bawaan/sementara
+      const displayTitle = item.ai_title_suggestion || item.title || "Tanpa Judul";
+      const cardContent = `
         <figure class="card-media ${aspectClass}">
-          <img src="${item.image}" alt="${item.title}" loading="lazy">
+          <img src="${item.image}" alt="${displayTitle}" loading="lazy">
         </figure>
         <div class="card-caption">
           <span class="card-tag">${item.badge || "Artwork"}</span>
-          <h3>${item.title}</h3>
+          <h3>${displayTitle}</h3>
+          ${item.title && item.ai_title_suggestion ? `<p class="temporary-title" style="font-size: 0.8em; opacity: 0.7;">Arsip: ${item.title}</p>` : ""}
           ${item.width && item.height ? `<p class="card-meta">${item.width}×${item.height} px</p>` : ""}
           ${item.description ? `<p class="card-excerpt">${item.description}</p>` : ""}
         </div>
       `;
+
+      // Jika ada tautan eksternal (misal artikel Floresa), bungkus dengan tautan <a>
+      if (item.external_link) {
+        card.innerHTML = `<a href="${item.external_link}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">${cardContent}</a>`;
+      } else {
+        card.innerHTML = cardContent;
+      }
 
       container.appendChild(card);
     });
@@ -49,7 +62,7 @@ async function loadGalleryData() {
   }
 }
 
-// Fungsi memuat data untuk index.html (Home)
+// 2. Fungsi memuat data untuk index.html (Home)
 async function loadHomeData() {
   try {
     const response = await fetch("content/home.json");
@@ -85,17 +98,4 @@ async function loadHomeData() {
   } catch (error) {
     console.error("Gagal memuat data home.json:", error);
   }
-
-  // Contoh cuplikan render kartu galeri di frontend web Anda
-itemHtml = `
-  <a href="${item.external_link || '#'}" target="_blank" class="gallery-card">
-    <img src="${item.image}" alt="${item.title}">
-    <div class="card-info">
-      <span class="badge">${item.badge}</span>
-      <h3>${item.ai_title_suggestion}</h3>
-      <p class="temporary-title">Judul Arsip: ${item.title}</p>
-      <p>${item.description}</p>
-    </div>
-  </a>
-`;
 }
