@@ -4,32 +4,32 @@ backend:
   branch: main
 
 media_folder: "assets/images"
-public_folder: "/assets/images"
+public_folder: "assets/images"
 
 collections:
- - label: "Halaman Utama"
-  name: "home"
-  file: "content/home.json"
-  fields:
-    - { label: "Judul Utama", name: "title", widget: "string" }
-    - { label: "Deskripsi Singkat", name: "description", widget: "text" }
-    - { label: "Gambar Utama Hero (800x1000)", name: "hero_image", widget: "image" }
-    - label: "Etalase 6 Karya Beranda"
-      name: "showcase_items"
-      widget: "list"
-      summary: "{{fields.title}}"
-      fields:
-        - { label: "Judul Karya", name: "title", widget: "string", required: false }
-        - label: "Orientasi / Ukuran Grid"
-          name: "orientation"
-          widget: "select"
-          options: ["landscape", "portrait", "square"]
-          default: "landscape"
-        - { label: "File Gambar", name: "image", widget: "image" }
-        - { label: "Kategori / Badge (Opsional)", name: "badge", widget: "string", required: false }
-        - { label: "Deskripsi (Opsional)", name: "description", widget: "text", required: false }
+  - label: "Halaman Utama"
+    name: "home"
+    file: "content/home.json"
+    fields:
+      - { label: "Judul Utama", name: "title", widget: "string", required: false }
+      - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", required: false }
+      - { label: "Deskripsi Singkat", name: "description", widget: "text", required: false }
+      - { label: "Gambar Utama Hero (800x1000)", name: "hero_image", widget: "image", required: false }
+      - label: "Etalase 6 Karya Beranda"
+        name: "showcase_items"
+        widget: "list"
+        summary: "{{fields.title}}"
+        fields:
+          - { label: "Judul Karya", name: "title", widget: "string", required: false }
+          - label: "Orientasi / Ukuran Grid"
+            name: "orientation"
+            widget: "select"
+            options: ["landscape", "portrait", "square"]
+            default: "landscape"
+          - { label: "File Gambar", name: "image", widget: "image" }
+          - { label: "Kategori / Badge (Opsional)", name: "badge", widget: "string", required: false }
+          - { label: "Deskripsi (Opsional)", name: "description", widget: "text", required: false }
 
-        
   - label: "Galeri Karya"
     name: "gallery"
     file: "content/gallery.json"
@@ -37,6 +37,7 @@ collections:
       - label: "Daftar Karya Galeri"
         name: "items"
         widget: "list"
+        summary: "{{fields.title}}"
         fields:
           - { label: "Judul Karya", name: "title", widget: "string" }
           - label: "Tahun"
@@ -47,7 +48,7 @@ collections:
             name: "media"
             widget: "select"
             options: ["Sketsa / Pensil", "Cat Minyak", "Cat Akrilik", "Digital Illustration", "Cetak Grafis / Print", "Instalasi / Mixed Media", "Lainnya"]
-          - label: "Format Ukuran"
+          - label: "Format Ukuran / Orientasi"
             name: "orientation"
             widget: "select"
             options: ["landscape", "portrait", "square"]
@@ -59,23 +60,24 @@ collections:
     name: "portfolio"
     file: "content/portfolio.json"
     fields:
-      - label: "Daftar Karya Pilihan"
+      - label: "Daftar Proyek Portofolio"
         name: "items"
         widget: "list"
+        summary: "{{fields.title}}"
         fields:
-          - { label: "Judul Karya", name: "title", widget: "string" }
+          - { label: "Judul Proyek / Karya", name: "title", widget: "string" }
           - label: "Tahun"
             name: "year"
             widget: "select"
             options: ["2026", "2025", "2024", "2023", "2022", "2021", "2020"]
-          - label: "Media / Teknik"
+          - label: "Media / Kategori"
             name: "media"
             widget: "select"
-            options: ["Sketsa / Pensil", "Cat Minyak", "Cat Akrilik", "Digital Illustration", "Cetak Grafis / Print", "Instalasi / Mixed Media", "Lainnya"]
-          - label: "Format Ukuran"
+            options: ["Editorial Illustration", "Exhibition & Visual Practice", "Book Illustration", "Social Critique", "Lainnya"]
+          - label: "Format Ukuran / Orientasi"
             name: "orientation"
             widget: "select"
             options: ["landscape", "portrait", "square"]
             default: "landscape"
-          - { label: "Gambar Karya", name: "image", widget: "image" }
-          - { label: "Deskripsi", name: "description", widget: "text", required: false }
+          - { label: "Gambar Karya / Cover", name: "image", widget: "image" }
+          - { label: "Deskripsi Ringkas", name: "description", widget: "text", required: false }
