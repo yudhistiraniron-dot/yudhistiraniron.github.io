@@ -5,25 +5,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   /* --------------------------------------------------------------------------
-     1. TOGGLE NAVIGASI MOBILE
+     1. TOGGLE NAVIGASI MOBILE (HP)
      -------------------------------------------------------------------------- */
-  const menuButton = document.querySelector('button[aria-label="Buka Menu Navigasi"]');
-  const navMenu = document.querySelector('nav ul');
+  const menuButton = document.querySelector('.menu-toggle-btn');
+  const siteNav = document.querySelector('.site-nav');
 
-  if (menuButton && navMenu) {
-    menuButton.addEventListener("click", function () {
-      if (navMenu.style.display === "flex") {
-        navMenu.style.display = "none";
-      } else {
-        navMenu.style.display = "flex";
-        navMenu.style.flexDirection = "column";
-        navMenu.style.position = "absolute";
-        navMenu.style.top = "100%";
-        navMenu.style.left = "0";
-        navMenu.style.width = "100%";
-        navMenu.style.backgroundColor = "var(--bg-surface)";
-        navMenu.style.padding = "1.5rem";
-        navMenu.style.borderBottom = "1px solid var(--border-sand-muted)";
+  if (menuButton && siteNav) {
+    menuButton.addEventListener("click", function (e) {
+      e.stopPropagation();
+      siteNav.classList.toggle('is-open');
+    });
+
+    // Menutup menu saat klik di luar area navigasi
+    document.addEventListener("click", function (e) {
+      if (!siteNav.contains(e.target) && !menuButton.contains(e.target)) {
+        siteNav.classList.remove('is-open');
       }
     });
   }
@@ -138,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
      5. PENGHUBUNG DATA CMS KE TAMPILAN WEB
      -------------------------------------------------------------------------- */
 
-  // A. PENGHUBUNG GALERI (gallery.html & preview di index.html)
   const galleryGrid = document.querySelector('.gallery-preview-grid, .gallery-grid');
   if (galleryGrid) {
     fetch('/content/gallery/index.json')
@@ -160,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log('CMS Galeri belum ada data:', err));
   }
 
-  // B. PENGHUBUNG PORTOFOLIO (portfolio.html)
   const portfolioGrid = document.querySelector('.portfolio-grid, .projects-list');
   if (portfolioGrid) {
     fetch('/content/portfolio/index.json')
@@ -186,7 +180,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log('CMS Portofolio belum ada data:', err));
   }
 
-  // C. PENGHUBUNG HALAMAN ABOUT (about.html)
   if (window.location.pathname.includes('about')) {
     fetch('/content/about.json')
       .then(res => res.json())
@@ -207,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log('CMS About belum ada data:', err));
   }
 
-  // D. PENGHUBUNG HALAMAN CV (cv.html)
   if (window.location.pathname.includes('cv')) {
     fetch('/content/cv.json')
       .then(res => res.json())
@@ -232,4 +224,4 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log('CMS CV belum ada data:', err));
   }
 
-}); // <-- PENUTUP UTAMA DOMContentLoaded YANG SEBELUMNYA KURANG
+});

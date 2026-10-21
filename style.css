@@ -482,23 +482,92 @@ footer li { margin-bottom: 0.4rem; font-size: 0.825rem; }
   transform: translateY(-2px);
 }
 
+  /* mediapunya */
+
 @media (max-width: 900px) {
   .portfolio-info-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-}
-
-
-@media (max-width: 900px) {
   #hero, .project-card, .project-item, #about-container, .modal-body, .footer-container, .home-about-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
-
 @media (max-width: 600px) {
-  main { padding: 1rem 1rem 0; }
-  header { padding: 0.85rem 1rem; }
-  nav ul { display: none; }
-  button[aria-label="Buka Menu Navigasi"] { display: block; }
-  .gallery-preview-grid, .grid-portrait, .grid-landscape { grid-template-columns: 1fr; }
-  .cv-item { grid-template-columns: 1fr; gap: 0.2rem; }
+  /* Memaksa header agar ikut ter-scroll ke atas bersama halaman di HP */
+  header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    padding: 0.6rem 1rem !important;
+  }
+ .brand a h1 { font-size: 0.85rem !important; 
+  line-height: 1.2;
+}
+  .brand a p { font-size: 0.65rem !important;
+   }
+  .menu-toggle-btn{
+    padding: 0.25rem 0.6rem !important;
+    font-size: 0.75rem !important;
+  }
+  main { 
+    padding: 1rem 1rem 0; 
+  }
+  
+  header { 
+    padding: 0.85rem 1rem; 
+  }
+  
+  /* Sembunyikan menu desktop & aktifkan tombol menu mobile */
+ .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--color-accent-gold);
+    padding: 1.2rem;
+    z-index: 99999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+  }
+
+  .site-nav.is-open {
+    display: block !important;
+  }
+
+  .site-nav ul {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .menu-toggle-btn {
+    display: block !important;
+    background: none;
+    border: 1px solid var(--border-sand-muted);
+    color: var(--color-warm-ivory);
+    padding: 0.4rem 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+    z-index: 100000;
+  }
+
+  .gallery-preview-grid, .grid-portrait, .grid-landscape { 
+    grid-template-columns: 1fr; 
+  }
+  .cv-item { 
+    grid-template-columns: 1fr; 
+    gap: 0.2rem; 
+  }
+}
+
+/* Sembunyikan tombol menu di layar komputer/desktop */
+@media (min-width: 601px) {
+  .menu-toggle-btn {
+    display: none !important;
+  }
+  .site-nav {
+    display: block !important;
+  }
 }
