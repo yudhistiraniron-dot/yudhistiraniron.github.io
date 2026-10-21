@@ -85,4 +85,17 @@ async function loadHomeData() {
   } catch (error) {
     console.error("Gagal memuat data home.json:", error);
   }
+
+  // Contoh cuplikan render kartu galeri di frontend web Anda
+itemHtml = `
+  <a href="${item.external_link || '#'}" target="_blank" class="gallery-card">
+    <img src="${item.image}" alt="${item.title}">
+    <div class="card-info">
+      <span class="badge">${item.badge}</span>
+      <h3>${item.ai_title_suggestion}</h3>
+      <p class="temporary-title">Judul Arsip: ${item.title}</p>
+      <p>${item.description}</p>
+    </div>
+  </a>
+`;
 }
