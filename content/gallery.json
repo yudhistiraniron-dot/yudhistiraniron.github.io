@@ -1,3 +1,60 @@
 {
-  "items": []
+  "items": [
+    {
+      "image": "assets/images/tolak.png",
+      "title": "Warisan Tercemar",
+      "ai_title_suggestion": "Menyusui Kehancuran: Warisan untuk Generasi Masa Depan",
+      "description": "Ilustrasi ini menampilkan tangan orang dewasa yang menyodorkan botol bayi berisi air keruh dan kerangka ikan mati ke arah tangan mungil seorang bayi. Karya ini menjadi sindiran tajam tentang bagaimana generasi masa kini mewariskan krisis ekologis dan lingkungan beracun kepada generasi penerus.",
+      "orientation": "square",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/profil.jpg",
+      "title": "Potret Pemuda di Gelanggang Olahraga",
+      "ai_title_suggestion": "Senyum di Ruang Publik Terpinggirkan",
+      "description": "Potret seorang pemuda yang berdiri percaya diri dengan senyum hangat di tengah aula olahraga yang bersahaja. Visual ini merefleksikan ketangguhan dan harapan generasi muda di tengah minimnya perhatian terhadap fasilitas komunitas.",
+      "orientation": "portrait",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/pejara 2.png",
+      "title": "Potret di Balik Jeruji Besi",
+      "ai_title_suggestion": "Keadilan yang Terbelenggu",
+      "description": "Karya ini memperlihatkan tatapan getir sekelompok orang berwajah lelah yang terkurung di balik jeruji besi berlatar merah pekat. Goresan garis yang kasar dan ekspresif menyuarakan kritik mendalam terhadap ketimpangan hukum serta ketidakberdayaan kaum marjinal.",
+      "orientation": "landscape",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/gabungan.png",
+      "title": "Kompilasi Ilustrasi Kritik Sosial dan Hak Asasi",
+      "ai_title_suggestion": "Mozaik Ketertindasan dan Suara Perlawanan",
+      "description": "Kumpulan karya ilustrasi digital ini merangkum narasi kritis seputar pelanggaran HAM, konflik agraria, represi aparat, serta pergulatan emosional rakyat jelata. Melalui visual yang tajam dan sarat simbolisme, karya ini menyuarakan keberanian melawan pembungkaman dan ketidakadilan struktural.",
+      "orientation": "portrait",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/depan (tanpa tulisan).png",
+      "title": "Perlawanan Terhadap Otoritas Institusional",
+      "ai_title_suggestion": "Suara yang Memecah Sunyi Kekuasaan",
+      "description": "Ilustrasi ini menggambarkan perlawanan berani sekelompok perempuan yang dipimpin oleh seorang figur dengan kepalan tangan terangkat ke udara. Mereka berdiri menantang bayang-bayang hierarki religius dan institusi patriarki yang menjulang mendominasi latar belakang.",
+      "orientation": "portrait",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/demi nama baik.png",
+      "title": "Demi Nama Baik Gereja",
+      "ai_title_suggestion": "Membungkam Luka di Balik Jubah Suci",
+      "description": "Ilustrasi ini menyuarakan perlawanan terhadap budaya impunitas dan pembungkaman suara korban kekerasan yang sering kali dikorbankan demi menjaga reputasi institusi keagamaan. Kontras visual antara siluet otoritas yang mengintimidasi dan figur wanita yang rapuh namun teguh mempertegas jeritan keadilan yang tertindas.",
+      "orientation": "landscape",
+      "badge": "Social Critique"
+    },
+    {
+      "image": "assets/images/caritas dan jery.jpeg",
+      "title": "Pameran Instalasi Investigasi Ruang Marginal",
+      "ai_title_suggestion": "Rekonstruksi Sunyi di Balik Benang Merah",
+      "description": "Instalasi multimedia ini memadukan relief bertekstur kasar, miniatur gubuk, dan papan arsip terhubung benang merah untuk mengupas narasi keterpinggiran sosial. Karya ini menghadirkan ruang refleksi kritis yang membongkar realitas ketimpangan dan jejak kemanusiaan yang kerap terabaikan.",
+      "orientation": "landscape",
+      "badge": "Social Critique"
+    }
+  ]
 }
