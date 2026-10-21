@@ -1,1 +1,12 @@
-[]
+{
+  "items": [
+    {
+      "title": "Cover Book Demi Nama Baik",
+      "year": "2026",
+      "image": "/assets/images/depan-tanpa-tulisan-.png",
+      "medium": "Digital Ilustration",
+      "aspect": "aspect-vertical",
+      "description": "Ilustrasi dan Desain Cover Book Floresa.co, tentang mengungkap kekerasan seksual dalam kultural katolik."
+    }
+  ]
+}
