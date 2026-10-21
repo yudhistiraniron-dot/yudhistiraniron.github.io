@@ -8,17 +8,17 @@ public_folder: "assets/images"
 
 collections:
   - label: "Halaman Utama"
-    name: "home_collection"
+    name: "home_pages"
     files:
-      - label: "Pengaturan Beranda & Etalase"
-        name: "home"
+      - label: "Pengaturan Beranda"
+        name: "home_entry"
         file: "content/home.json"
         fields:
           - { label: "Judul Utama", name: "title", widget: "string", required: false }
           - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", required: false }
           - { label: "Deskripsi Singkat", name: "description", widget: "text", required: false }
-          - { label: "1. Gambar Utama Samping Hero (Portrait)", name: "hero_image", widget: "image", required: false }
-          - label: "2. Etalase Karya Beranda"
+          - { label: "Gambar Samping Hero (Portrait)", name: "hero_image", widget: "image", required: false }
+          - label: "Etalase 5 Karya Beranda"
             name: "showcase_items"
             widget: "list"
             summary: "{{fields.title}}"
@@ -35,61 +35,3 @@ collections:
               - { label: "File Gambar", name: "image", widget: "image" }
               - { label: "Kategori / Badge (Opsional)", name: "badge", widget: "string", required: false }
               - { label: "Deskripsi (Opsional)", name: "description", widget: "text", required: false }
-
-  - label: "Galeri Karya"
-    name: "gallery_collection"
-    files:
-      - label: "Daftar Karya Galeri"
-        name: "gallery"
-        file: "content/gallery.json"
-        fields:
-          - label: "Daftar Karya"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Judul Karya", name: "title", widget: "string" }
-              - label: "Tahun"
-                name: "year"
-                widget: "select"
-                options: ["2026", "2025", "2024", "2023", "2022", "2021", "2020"]
-              - label: "Media / Teknik"
-                name: "media"
-                widget: "select"
-                options: ["Sketsa / Pensil", "Cat Minyak", "Cat Akrilik", "Digital Illustration", "Cetak Grafis / Print", "Instalasi / Mixed Media", "Lainnya"]
-              - label: "Orientasi / Format Grid"
-                name: "orientation"
-                widget: "select"
-                options: ["landscape", "portrait", "square"]
-                default: "landscape"
-              - { label: "Gambar Karya", name: "image", widget: "image" }
-              - { label: "Deskripsi", name: "description", widget: "text", required: false }
-
-  - label: "Portofolio Utama"
-    name: "portfolio_collection"
-    files:
-      - label: "Daftar Proyek Portofolio"
-        name: "portfolio"
-        file: "content/portfolio.json"
-        fields:
-          - label: "Daftar Proyek"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Judul Proyek", name: "title", widget: "string" }
-              - label: "Tahun"
-                name: "year"
-                widget: "select"
-                options: ["2026", "2025", "2024", "2023", "2022", "2021", "2020"]
-              - label: "Media / Kategori"
-                name: "media"
-                widget: "select"
-                options: ["Editorial Illustration", "Exhibition & Visual Practice", "Book Illustration", "Social Critique", "Lainnya"]
-              - label: "Orientasi / Format Grid"
-                name: "orientation"
-                widget: "select"
-                options: ["landscape", "portrait", "square"]
-                default: "landscape"
-              - { label: "Gambar Karya / Cover", name: "image", widget: "image" }
-              - { label: "Deskripsi Ringkas", name: "description", widget: "text", required: false }
