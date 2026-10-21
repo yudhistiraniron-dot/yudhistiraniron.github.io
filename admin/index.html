@@ -7,7 +7,10 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Tampilan Dasbor Admin Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Memuat file CSS utama situs web Anda ke dalam pratinjau CMS
+    CMS.registerPreviewStyle("/css/style.css");
+  </script>
 </body>
 </html>

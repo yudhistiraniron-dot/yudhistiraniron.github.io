@@ -6,73 +6,69 @@ media_folder: "assets/images"
 public_folder: "/assets/images"
 
 collections:
-  # 1. HALAMAN HOME (Teks & Foto Utama)
+  # 1. HALAMAN HOME
   - name: "home"
     label: "Halaman Home"
     files:
       - file: "content/home.json"
-        label: "Konten & Teks Home"
+        label: "Edit Teks & Foto Utama Home"
         name: "home_settings"
         fields:
-          - { label: "Judul Utama", name: "title", widget: "string" }
-          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string" }
-          - { label: "Foto Profil / Seniman (Home)", name: "hero_image", widget: "image" }
-          - { label: "Teks Ringkasan Profil", name: "about_summary", widget: "markdown" }
-          - { label: "Teks Tombol Aksi", name: "button_text", widget: "string" }
+          - { label: "Judul Utama", name: "title", widget: "string", description: "Teks judul besar di bagian atas halaman depan." }
+          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", description: "Teks pendek di bawah judul utama." }
+          - { label: "Foto Highlight / Profil", name: "hero_image", widget: "image", description: "Foto karya atau profil yang tampil menonjol di halaman Home." }
+          - { label: "Teks Ringkasan Singkat", name: "about_summary", widget: "markdown", description: "Pengenalan singkat tentang Anda di halaman depan." }
 
-  # 2. HALAMAN PORTOFOLIO (Proyek / Pameran / Publikasi)
+  # 2. HALAMAN PORTOFOLIO
   - name: "portfolio"
     label: "Portofolio Utama"
     folder: "content/portfolio"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Judul Proyek / Karya", name: "title", widget: "string" }
-      - { label: "Kategori", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"] }
-      - { label: "Tahun", name: "year", widget: "string" }
-      - { label: "Gambar Sampul", name: "thumbnail", widget: "image" }
-      - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text" }
-      - { label: "Deskripsi Lengkap & Dokumentasi", name: "body", widget: "markdown" }
+      - { label: "Judul Proyek / Karya", name: "title", widget: "string", description: "Nama proyek, tulisan, atau pameran." }
+      - { label: "Kategori Proyek", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"], description: "Pilih kategori yang sesuai." }
+      - { label: "Tahun", name: "year", widget: "string", description: "Contoh: 2026" }
+      - { label: "Gambar Sampul (Thumbnail)", name: "thumbnail", widget: "image", description: "Gambar yang muncul di daftar kartu portofolio." }
+      - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text", description: "Ringkasan 1-2 kalimat untuk pratinjau kartu." }
+      - { label: "Dokumentasi & Teks Lengkap", name: "body", widget: "markdown", description: "Tuliskan catatan, proses kreatif, atau unggah foto-foto dokumentasi tambahan di sini." }
 
-  # 3. GALERI ARSIP (Karya Visual / Gambar)
+  # 3. ARSIP GALERI
   - name: "gallery"
     label: "Arsip Galeri"
     folder: "content/gallery"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Judul Karya", name: "title", widget: "string" }
-      - { label: "Tahun", name: "year", widget: "string" }
-      - { label: "File Gambar/Ilustrasi", name: "image", widget: "image" }
-      - { label: "Media / Teknik", name: "medium", widget: "string" }
-      - { label: "Deskripsi / Catatan Karya", name: "description", widget: "text" }
+      - { label: "Judul Karya Visual", name: "title", widget: "string", description: "Judul lukisan/ilustrasi/karya." }
+      - { label: "Tahun Dibuat", name: "year", widget: "string", description: "Contoh: 2026" }
+      - { label: "File Gambar Utama", name: "image", widget: "image", description: "Unggah file resolusi tinggi untuk galeri." }
+      - { label: "Media / Teknik", name: "medium", widget: "string", description: "Contoh: Digital Illustration / Ink on Paper" }
+      - { label: "Catatan / Deskripsi Karya", name: "description", widget: "text", description: "Penjelasan singkat latar belakang karya." }
 
-  # 4. HALAMAN ABOUT (Profil & Pendekatan)
+  # 4. HALAMAN ABOUT
   - name: "about"
     label: "Halaman About"
     files:
       - file: "content/about.json"
-        label: "Profil & Pendekatan Lengkap"
+        label: "Edit Bio & Profil About"
         name: "about_settings"
         fields:
-          - { label: "Judul Halaman", name: "title", widget: "string" }
-          - { label: "Foto Seniman", name: "artist_image", widget: "image" }
-          - { label: "Biografi Lengkap", name: "bio", widget: "markdown" }
-          - { label: "Pernyataan Seniman (Artist Statement)", name: "statement", widget: "markdown" }
-          - { label: "Kontak & Tautan Sosial", name: "contact_info", widget: "markdown" }
+          - { label: "Judul Halaman", name: "title", widget: "string", description: "Judul utama halaman About (misal: 'Tentang Saya')." }
+          - { label: "Foto Profil Seniman", name: "artist_image", widget: "image", description: "Foto Anda yang muncul di halaman About." }
+          - { label: "Biografi Lengkap", name: "bio", widget: "markdown", description: "Narasi perjalanan dan latar belakang Anda." }
+          - { label: "Artist Statement", name: "statement", widget: "markdown", description: "Pernyataan kekaryaan / pendekatan artistik Anda." }
 
-  # 5. HALAMAN CV (Kurikulum Vitae & Riwayat)
+  # 5. HALAMAN CV
   - name: "cv"
     label: "Halaman CV"
     files:
       - file: "content/cv.json"
-        label: "Isi Kurikulum Vitae"
+        label: "Edit Isi Kurikulum Vitae"
         name: "cv_settings"
         fields:
-          - { label: "Judul Halaman", name: "title", widget: "string", default: "Curriculum Vitae" }
-          - { label: "Pendidikan & Latar Belakang Academic", name: "education", widget: "markdown" }
-          - { label: "Pameran & Tampilan Karya (Exhibitions)", name: "exhibitions", widget: "markdown" }
-          - { label: "Publikasi, Esai & Ilustrasi", name: "publications", widget: "markdown" }
-          - { label: "Pengalaman Kolektif & Proyek", name: "experience", widget: "markdown" }
-          - { label: "Penghargaan / Residensi (Jika ada)", name: "awards", widget: "markdown", required: false }
-          - { label: "Link Download PDF CV (Opsional)", name: "cv_pdf", widget: "file", required: false }
+          - { label: "Pendidikan & Akademik", name: "education", widget: "markdown", description: "Daftar riwayat pendidikan formal." }
+          - { label: "Pameran & Ekshibisi", name: "exhibitions", widget: "markdown", description: "Daftar pameran tunggal maupun kelompok." }
+          - { label: "Publikasi & Karya Tulis", name: "publications", widget: "markdown", description: "Daftar tulisan, cerpen, atau karya ilustrasi terbitan." }
+          - { label: "Pengalaman & Kolektif", name: "experience", widget: "markdown", description: "Pengalaman di organisasi, kolektif, atau proyek riset." }
+          - { label: "File PDF CV Lengkap (Opsional)", name: "cv_pdf", widget: "file", required: false, description: "Unggah file PDF CV jika ingin pengunjung bisa mengunduhnya." }
