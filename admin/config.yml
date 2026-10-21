@@ -1,11 +1,40 @@
 backend:
   name: git-gateway
-  branch: main # Ganti dengan 'master' jika branch utama GitHub Anda bernama master
+  branch: main
 
-media_folder: "assets" # Tempat menyimpan foto yang diunggah dari CMS
-public_folder: "assets"
+media_folder: "assets/images"
+public_folder: "/assets/images"
 
 collections:
+  # 1. HALAMAN HOME (Teks & Foto Utama)
+  - name: "home"
+    label: "Halaman Home"
+    files:
+      - file: "content/home.json"
+        label: "Konten & Teks Home"
+        name: "home_settings"
+        fields:
+          - { label: "Judul Utama", name: "title", widget: "string" }
+          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string" }
+          - { label: "Foto Profil / Seniman (Home)", name: "hero_image", widget: "image" }
+          - { label: "Teks Ringkasan Profil", name: "about_summary", widget: "markdown" }
+          - { label: "Teks Tombol Aksi", name: "button_text", widget: "string" }
+
+  # 2. HALAMAN PORTOFOLIO (Proyek / Pameran / Publikasi)
+  - name: "portfolio"
+    label: "Portofolio Utama"
+    folder: "content/portfolio"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul Proyek / Karya", name: "title", widget: "string" }
+      - { label: "Kategori", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"] }
+      - { label: "Tahun", name: "year", widget: "string" }
+      - { label: "Gambar Sampul", name: "thumbnail", widget: "image" }
+      - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text" }
+      - { label: "Deskripsi Lengkap & Dokumentasi", name: "body", widget: "markdown" }
+
+  # 3. GALERI ARSIP (Karya Visual / Gambar)
   - name: "gallery"
     label: "Arsip Galeri"
     folder: "content/gallery"
@@ -13,16 +42,37 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Judul Karya", name: "title", widget: "string" }
-      - { label: "Tahun & Medium", name: "meta", widget: "string", default: "2026 · Digital Ink" }
-      - { 
-          label: "Kategori", 
-          name: "category", 
-          widget: "select", 
-          options: [
-            { label: "Personal & Refleksi", value: "personal" },
-            { label: "Seni Sosial & Riset", value: "social" },
-            { label: "Editorial Archive", value: "editorial" }
-          ] 
-        }
-      - { label: "Unggah Foto Karya", name: "image", widget: "image" }
-      - { label: "Deskripsi / Catatan Seniman", name: "description", widget: "text" }
+      - { label: "Tahun", name: "year", widget: "string" }
+      - { label: "File Gambar/Ilustrasi", name: "image", widget: "image" }
+      - { label: "Media / Teknik", name: "medium", widget: "string" }
+      - { label: "Deskripsi / Catatan Karya", name: "description", widget: "text" }
+
+  # 4. HALAMAN ABOUT (Profil & Pendekatan)
+  - name: "about"
+    label: "Halaman About"
+    files:
+      - file: "content/about.json"
+        label: "Profil & Pendekatan Lengkap"
+        name: "about_settings"
+        fields:
+          - { label: "Judul Halaman", name: "title", widget: "string" }
+          - { label: "Foto Seniman", name: "artist_image", widget: "image" }
+          - { label: "Biografi Lengkap", name: "bio", widget: "markdown" }
+          - { label: "Pernyataan Seniman (Artist Statement)", name: "statement", widget: "markdown" }
+          - { label: "Kontak & Tautan Sosial", name: "contact_info", widget: "markdown" }
+
+  # 5. HALAMAN CV (Kurikulum Vitae & Riwayat)
+  - name: "cv"
+    label: "Halaman CV"
+    files:
+      - file: "content/cv.json"
+        label: "Isi Kurikulum Vitae"
+        name: "cv_settings"
+        fields:
+          - { label: "Judul Halaman", name: "title", widget: "string", default: "Curriculum Vitae" }
+          - { label: "Pendidikan & Latar Belakang Academic", name: "education", widget: "markdown" }
+          - { label: "Pameran & Tampilan Karya (Exhibitions)", name: "exhibitions", widget: "markdown" }
+          - { label: "Publikasi, Esai & Ilustrasi", name: "publications", widget: "markdown" }
+          - { label: "Pengalaman Kolektif & Proyek", name: "experience", widget: "markdown" }
+          - { label: "Penghargaan / Residensi (Jika ada)", name: "awards", widget: "markdown", required: false }
+          - { label: "Link Download PDF CV (Opsional)", name: "cv_pdf", widget: "file", required: false }
