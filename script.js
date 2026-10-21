@@ -39,4 +39,44 @@ async function loadHomeData() {
   } catch (error) {
     console.error("Gagal memuat data home.json:", error);
   }
+
+  const fs = require('fs');
+const path = require('path');
+
+const imageDir = './KARYA'; // Ganti dengan nama folder karya Anda
+const outputJson = './content/gallery.json';
+
+const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+if (!fs.existsSync('content')) {
+  fs.mkdirSync('content', { recursive: true });
+}
+
+console.log("Memindai folder karya...");
+
+fs.readdir(imageDir, (err, files) => {
+  if (err) {
+    console.error("Gagal membaca folder (pastikan nama folder sudah benar):", err);
+    return;
+  }
+
+  const galleryItems = files
+    .filter(file => validExtensions.includes(path.extname(file).toLowerCase()))
+    .map(file => {
+      const cleanTitle = path.basename(file, path.extname(file))
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase());
+
+      return {
+        title: cleanTitle,
+        image: `${imageDir}/${file}`,
+        orientation: "landscape", // Default aman
+        badge: "Artwork",
+        description: ""
+      };
+    });
+
+  fs.writeFileSync(outputJson, JSON.stringify({ items: galleryItems }, null, 2), 'utf-8');
+  console.log(`Selesai! Total ${galleryItems.length} karya berhasil dicatat ke '${outputJson}'.`);
+});
 }

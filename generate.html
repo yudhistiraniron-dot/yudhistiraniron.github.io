@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Generator Galeri Pielxo</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #121212; color: #f0f0f0; max-width: 500px; margin: 80px auto; padding: 30px; border-radius: 12px; background: #1e1e1e; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
+        h1 { font-size: 20px; margin-bottom: 10px; }
+        p { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+        input[type="file"] { display: block; margin: 0 auto 20px; background: #2a2a2a; padding: 10px; border-radius: 6px; width: 100%; box-sizing: border-box; cursor: pointer; color: #fff; }
+        button { background: #4f46e5; color: #fff; border: none; padding: 12px 24px; font-size: 15px; cursor: pointer; border-radius: 6px; font-weight: bold; width: 100%; transition: background 0.2s; }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; }
+        button:not(:disabled):hover { background: #4338ca; }
+        #status { margin-top: 20px; font-size: 14px; color: #38bdf8; }
+    </style>
+</head>
+<body>
+    <h1>Auto Gallery JSON Generator</h1>
+    <p>Pilih folder tempat penyimpanan seluruh karya seni Anda.</p>
+    
+    <input type="file" id="folderInput" webkitdirectory directory multiple>
+    <button id="generateBtn" disabled>Proses & Download gallery.json</button>
+    <div id="status"></div>
+
+    <script>
+        const folderInput = document.getElementById('folderInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const statusEl = document.getElementById('status');
+        let selectedFiles = [];
+        let folderName = '';
+
+        folderInput.addEventListener('change', (e) => {
+            selectedFiles = Array.from(e.target.files);
+            if (selectedFiles.length > 0) {
+                // Ambil nama folder utama
+                const firstPath = selectedFiles[0].webkitRelativePath;
+                folderName = firstPath.split('/')[0];
+                
+                generateBtn.disabled = false;
+                statusEl.innerText = `${selectedFiles.length} file ditemukan di folder "${folderName}". Siap diproses!`;
+            }
+        });
+
+        generateBtn.addEventListener('click', async () => {
+            const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+            const items = [];
+            statusEl.innerText = "Sedang membaca ukuran piksel karya...";
+
+            for (const file of selectedFiles) {
+                const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+                if (!validExtensions.includes(ext)) continue;
+
+                const imageUrl = URL.createObjectURL(file);
+                const dimensions = await getImageDimensions(imageUrl);
+                
+                const ratio = dimensions.width / dimensions.height;
+                let orientation = "landscape";
+                if (ratio > 1.15) orientation = "landscape";
+                else if (ratio < 0.85) orientation = "portrait";
+                else orientation = "square";
+
+                const cleanTitle = file.name.substring(0, file.name.lastIndexOf('.'))
+                    .replace(/[-_]/g, ' ')
+                    .replace(/\b\w/g, l => l.toUpperCase());
+
+                // Jalur gambar di web mengarah ke folder baru Anda
+                const imagePath = `${folderName}/${file.name}`;
+
+                items.push({
+                    title: cleanTitle,
+                    image: imagePath,
+                    orientation: orientation,
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    badge: "Artwork",
+                    description: ""
+                });
+            }
+
+            // Buat file JSON dan otomatis download ke komputer
+            const jsonContent = JSON.stringify({ items }, null, 2);
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'gallery.json';
+            a.click();
+
+            statusEl.innerText = `Berhasil! Total ${items.length} karya tercatat. File gallery.json telah terdownload. Pindahkan file tersebut ke folder 'content/' di proyek Anda.`;
+        });
+
+        function getImageDimensions(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({ width: img.width, height: img.height });
+                img.src = url;
+            });
+        }
+    </script>
+</body>
+</html>
