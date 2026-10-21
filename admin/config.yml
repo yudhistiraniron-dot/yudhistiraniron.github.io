@@ -6,7 +6,7 @@ media_folder: "assets/images"
 public_folder: "/assets/images"
 
 collections:
-  # 1. HALAMAN HOME
+  # 1. PENGATURAN HALAMAN HOME (SINGLE FILE)
   - name: "home"
     label: "Halaman Home"
     files:
@@ -14,39 +14,50 @@ collections:
         label: "Edit Teks & Foto Utama Home"
         name: "home_settings"
         fields:
-          - { label: "Judul Utama", name: "title", widget: "string", description: "Teks judul besar di bagian atas halaman depan." }
-          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", description: "Teks pendek di bawah judul utama." }
-          - { label: "Foto Highlight / Profil", name: "hero_image", widget: "image", description: "Foto karya atau profil yang tampil menonjol di halaman Home." }
-          - { label: "Teks Ringkasan Singkat", name: "about_summary", widget: "markdown", description: "Pengenalan singkat tentang Anda di halaman depan." }
+          - { label: "Judul Utama", name: "title", widget: "string", description: "Judul besar di bagian hero." }
+          - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", description: "Teks tagline di atas judul." }
+          - { label: "Teks Ringkasan Singkat", name: "about_summary", widget: "text", description: "Deskripsi narasi singkat di halaman depan." }
+          - { label: "Teks Tombol Utama", name: "button_text", widget: "string", description: "Teks tombol aksi utama." }
+          - { label: "Foto Utama (Hero Image)", name: "hero_image", widget: "image", description: "Foto karya/profil di bagian hero." }
 
-  # 2. HALAMAN PORTOFOLIO
-  - name: "portfolio"
+  # 2. PORTOFOLIO (1 FILE JSON UTUH DENGAN LIST)
+  - name: "portfolio_page"
     label: "Portofolio Utama"
-    folder: "content/portfolio"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Judul Proyek / Karya", name: "title", widget: "string", description: "Nama proyek, tulisan, atau pameran." }
-      - { label: "Kategori Proyek", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"], description: "Pilih kategori yang sesuai." }
-      - { label: "Tahun", name: "year", widget: "string", description: "Contoh: 2026" }
-      - { label: "Gambar Sampul (Thumbnail)", name: "thumbnail", widget: "image", description: "Gambar yang muncul di daftar kartu portofolio." }
-      - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text", description: "Ringkasan 1-2 kalimat untuk pratinjau kartu." }
-      - { label: "Dokumentasi & Teks Lengkap", name: "body", widget: "markdown", description: "Tuliskan catatan, proses kreatif, atau unggah foto-foto dokumentasi tambahan di sini." }
+    files:
+      - file: "content/portfolio.json"
+        label: "Daftar Proyek Portofolio"
+        name: "portfolio_data"
+        fields:
+          - label: "Daftar Proyek"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Judul Proyek / Karya", name: "title", widget: "string", description: "Nama proyek atau pameran." }
+              - { label: "Kategori Proyek", name: "category", widget: "select", options: ["Ilustrasi Editorial", "Pameran Seni", "Penulisan / Esai", "Proyek Visual"], description: "Pilih kategori proyek." }
+              - { label: "Tahun", name: "year", widget: "string", description: "Contoh: 2026" }
+              - { label: "Gambar Sampul (Thumbnail)", name: "thumbnail", widget: "image", description: "Gambar yang muncul di daftar kartu." }
+              - { label: "Deskripsi Ringkas", name: "excerpt", widget: "text", description: "Ringkasan 1-2 kalimat untuk pratinjau kartu." }
 
-  # 3. ARSIP GALERI
-  - name: "gallery"
+  # 3. ARSIP GALERI (1 FILE JSON UTUH DENGAN LIST)
+  - name: "gallery_page"
     label: "Arsip Galeri"
-    folder: "content/gallery"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Judul Karya Visual", name: "title", widget: "string", description: "Judul lukisan/ilustrasi/karya." }
-      - { label: "Tahun Dibuat", name: "year", widget: "string", description: "Contoh: 2026" }
-      - { label: "File Gambar Utama", name: "image", widget: "image", description: "Unggah file resolusi tinggi untuk galeri." }
-      - { label: "Media / Teknik", name: "medium", widget: "string", description: "Contoh: Digital Illustration / Ink on Paper" }
-      - { label: "Catatan / Deskripsi Karya", name: "description", widget: "text", description: "Penjelasan singkat latar belakang karya." }
+    files:
+      - file: "content/gallery.json"
+        label: "Daftar Karya Galeri"
+        name: "gallery_data"
+        fields:
+          - label: "Daftar Karya"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Judul Karya Visual", name: "title", widget: "string", description: "Judul lukisan/ilustrasi." }
+              - { label: "Tahun Dibuat", name: "year", widget: "string", description: "Contoh: 2026" }
+              - { label: "File Gambar Utama", name: "image", widget: "image", description: "Unggah file resolusi tinggi untuk galeri." }
+              - { label: "Media / Teknik", name: "medium", widget: "string", description: "Contoh: Digital Illustration / Ink on Paper" }
+              - { label: "Proporsi (Aspect Ratio)", name: "aspect", widget: "select", options: ["aspect-square", "aspect-vertical", "aspect-landscape"], description: "Pilih bentuk orientasi gambar." }
+              - { label: "Catatan / Deskripsi Karya", name: "description", widget: "text", description: "Penjelasan singkat latar belakang karya." }
 
-  # 4. HALAMAN ABOUT
+  # 4. PENGATURAN HALAMAN ABOUT (SINGLE FILE)
   - name: "about"
     label: "Halaman About"
     files:
@@ -54,12 +65,12 @@ collections:
         label: "Edit Bio & Profil About"
         name: "about_settings"
         fields:
-          - { label: "Judul Halaman", name: "title", widget: "string", description: "Judul utama halaman About (misal: 'Tentang Saya')." }
+          - { label: "Judul Halaman", name: "title", widget: "string", description: "Judul utama halaman About." }
           - { label: "Foto Profil Seniman", name: "artist_image", widget: "image", description: "Foto Anda yang muncul di halaman About." }
           - { label: "Biografi Lengkap", name: "bio", widget: "markdown", description: "Narasi perjalanan dan latar belakang Anda." }
           - { label: "Artist Statement", name: "statement", widget: "markdown", description: "Pernyataan kekaryaan / pendekatan artistik Anda." }
 
-  # 5. HALAMAN CV
+  # 5. PENGATURAN HALAMAN CV (SINGLE FILE)
   - name: "cv"
     label: "Halaman CV"
     files:
@@ -67,8 +78,8 @@ collections:
         label: "Edit Isi Kurikulum Vitae"
         name: "cv_settings"
         fields:
-          - { label: "Pendidikan & Akademik", name: "education", widget: "markdown", description: "Daftar riwayat pendidikan formal." }
-          - { label: "Pameran & Ekshibisi", name: "exhibitions", widget: "markdown", description: "Daftar pameran tunggal maupun kelompok." }
-          - { label: "Publikasi & Karya Tulis", name: "publications", widget: "markdown", description: "Daftar tulisan, cerpen, atau karya ilustrasi terbitan." }
-          - { label: "Pengalaman & Kolektif", name: "experience", widget: "markdown", description: "Pengalaman di organisasi, kolektif, atau proyek riset." }
-          - { label: "File PDF CV Lengkap (Opsional)", name: "cv_pdf", widget: "file", required: false, description: "Unggah file PDF CV jika ingin pengunjung bisa mengunduhnya." }
+          - { label: "Pendidikan & Akademik", name: "education", widget: "markdown", description: "Riwayat pendidikan formal." }
+          - { label: "Pameran & Ekshibisi", name: "exhibitions", widget: "markdown", description: "Daftar pameran." }
+          - { label: "Publikasi & Karya Tulis", name: "publications", widget: "markdown", description: "Daftar tulisan atau cerpen." }
+          - { label: "Pengalaman & Kolektif", name: "experience", widget: "markdown", description: "Pengalaman organisasi atau proyek riset." }
+          - { label: "File PDF CV Lengkap", name: "cv_pdf", widget: "file", required: false, description: "Unggah file PDF CV jika ada." }

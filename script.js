@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EFRAIM YUDHISTIRA NIRON — MAIN INTERACTIVE SCRIPT (MONOLINGUAL ID)
+   EFRAIM YUDHISTIRA NIRON — MAIN INTERACTIVE SCRIPT (CMS INTEGRATION)
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
       siteNav.classList.toggle('is-open');
     });
 
-    // Menutup menu saat klik di luar area navigasi
     document.addEventListener("click", function (e) {
       if (!siteNav.contains(e.target) && !menuButton.contains(e.target)) {
         siteNav.classList.remove('is-open');
@@ -25,22 +24,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* --------------------------------------------------------------------------
-     2. FILTER KATEGORI GALERI
+     2. FILTER KATEGORI GALERI & PORTFOLIO
      -------------------------------------------------------------------------- */
-  const filterButtons = document.querySelectorAll(".gallery-filters .filter-btn");
-  const galleryCards = document.querySelectorAll(".gallery-card");
-
-  if (filterButtons.length > 0 && galleryCards.length > 0) {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  if (filterButtons.length > 0) {
     filterButtons.forEach(button => {
       button.addEventListener("click", function () {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
+        const parentContainer = this.closest('section');
+        parentContainer.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
         this.classList.add("active");
 
         const targetCategory = this.getAttribute("data-filter");
+        const cards = parentContainer.querySelectorAll(".gallery-card, .project-item");
 
-        galleryCards.forEach(card => {
+        cards.forEach(card => {
           const cardCategory = card.getAttribute("data-category");
-
           if (targetCategory === "all" || cardCategory === targetCategory) {
             card.style.display = "flex";
           } else {
@@ -76,7 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   `;
   
-  document.body.insertAdjacentHTML("beforeend", modalHTML);
+  if (!document.getElementById("lightbox-modal")) {
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+  }
 
   const modal = document.getElementById("lightbox-modal");
   const modalImg = document.getElementById("modal-img");
@@ -86,24 +86,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalDesc = document.getElementById("modal-desc");
   const closeModalBtn = document.querySelector(".close-modal");
 
-  galleryCards.forEach(card => {
-    card.addEventListener("click", function () {
-      const imgElement = this.querySelector("img");
-      const titleElement = this.querySelector("h3");
-      const tagElement = this.querySelector(".card-tag");
-      const metaElement = this.querySelector(".card-meta");
-      const excerptElement = this.querySelector(".card-excerpt");
+  function attachLightboxListeners() {
+    document.querySelectorAll(".gallery-card").forEach(card => {
+      card.addEventListener("click", function () {
+        const imgElement = this.querySelector("img");
+        const titleElement = this.querySelector("h3");
+        const tagElement = this.querySelector(".card-tag");
+        const metaElement = this.querySelector(".card-meta");
+        const excerptElement = this.querySelector(".card-excerpt");
 
-      if (imgElement) modalImg.src = imgElement.src;
-      if (titleElement) modalTitle.textContent = titleElement.textContent;
-      if (tagElement) modalTag.textContent = tagElement.textContent;
-      if (metaElement) modalMeta.textContent = metaElement.textContent;
-      if (excerptElement) modalDesc.textContent = excerptElement.textContent;
+        if (imgElement) modalImg.src = imgElement.src;
+        if (titleElement) modalTitle.textContent = titleElement.textContent;
+        if (tagElement) modalTag.textContent = tagElement.textContent;
+        if (metaElement) modalMeta.textContent = metaElement.textContent;
+        if (excerptElement) modalDesc.textContent = excerptElement.textContent;
 
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      });
     });
-  });
+  }
+
+  attachLightboxListeners();
 
   function closeModal() {
     if (modal) {
@@ -112,14 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener("click", closeModal);
-  }
-
+  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
   window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closeModal();
-    }
+    if (event.target === modal) closeModal();
   });
 
   /* --------------------------------------------------------------------------
@@ -131,97 +130,242 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* --------------------------------------------------------------------------
-     5. PENGHUBUNG DATA CMS KE TAMPILAN WEB
+     5. PENGHUBUNG DATA CMS KE MASING-MASING HALAMAN HTML
      -------------------------------------------------------------------------- */
 
-  const galleryGrid = document.querySelector('.gallery-preview-grid, .gallery-grid');
-  if (galleryGrid) {
-    fetch('/content/gallery/index.json')
-      .then(res => res.json())
-      .then(karyaList => {
-        if (Array.isArray(karyaList) && karyaList.length > 0) {
-          galleryGrid.innerHTML = '';
-          karyaList.forEach(karya => {
-            const figure = document.createElement('figure');
-            figure.className = karya.aspect || 'aspect-square';
-            figure.innerHTML = `
-              <img src="${karya.image}" alt="${karya.title}">
-              <figcaption>${karya.title} — ${karya.medium || ''} (${karya.year || ''})</figcaption>
-            `;
-            galleryGrid.appendChild(figure);
-          });
-        }
-      })
-      .catch(err => console.log('CMS Galeri belum ada data:', err));
-  }
-
-  const portfolioGrid = document.querySelector('.portfolio-grid, .projects-list');
-  if (portfolioGrid) {
-    fetch('/content/portfolio/index.json')
-      .then(res => res.json())
-      .then(proyekList => {
-        if (Array.isArray(proyekList) && proyekList.length > 0) {
-          portfolioGrid.innerHTML = '';
-          proyekList.forEach(item => {
-            const card = document.createElement('article');
-            card.className = 'portfolio-card';
-            card.innerHTML = `
-              <img src="${item.thumbnail}" alt="${item.title}">
-              <div class="card-body">
-                <span class="category">${item.category || ''} · ${item.year || ''}</span>
-                <h3>${item.title}</h3>
-                <p>${item.excerpt || ''}</p>
-              </div>
-            `;
-            portfolioGrid.appendChild(card);
-          });
-        }
-      })
-      .catch(err => console.log('CMS Portofolio belum ada data:', err));
-  }
-
-  if (window.location.pathname.includes('about')) {
-    fetch('/content/about.json')
+  // A. HALAMAN HOME (index.html)
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+    fetch('content/home.json')
       .then(res => res.json())
       .then(data => {
-        if (data.artist_image) {
-          const img = document.querySelector('.about-image img');
-          if (img) img.src = data.artist_image;
+        if (data.title) {
+          const el = document.getElementById('home-title');
+          if (el) el.textContent = data.title;
         }
-        if (data.bio) {
-          const bioEl = document.querySelector('.about-bio');
-          if (bioEl) bioEl.innerHTML = data.bio;
+        if (data.subtitle) {
+          const el = document.getElementById('home-subtitle');
+          if (el) el.textContent = data.subtitle;
         }
-        if (data.statement) {
-          const stmtEl = document.querySelector('.about-statement');
-          if (stmtEl) stmtEl.innerHTML = data.statement;
+        if (data.about_summary) {
+          const el = document.getElementById('home-summary');
+          if (el) el.innerHTML = data.about_summary.split('\n\n').map(p => `<p>${p}</p>`).join('');
+        }
+        if (data.hero_image) {
+          const el = document.getElementById('home-hero-img');
+          if (el) el.src = data.hero_image;
+        }
+        if (data.button_text) {
+          const el = document.getElementById('home-btn');
+          if (el) el.textContent = data.button_text;
         }
       })
-      .catch(err => console.log('CMS About belum ada data:', err));
+      .catch(err => console.log('Home JSON belum dimuat:', err));
   }
 
+  // B. HALAMAN PORTOFOLIO (portfolio.html)
+  const projectsContainer = document.getElementById('projects-container');
+  if (projectsContainer) {
+    fetch('content/portfolio.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.items && Array.isArray(data.items) && data.items.length > 0) {
+          projectsContainer.innerHTML = '';
+          data.items.forEach(item => {
+            const article = document.createElement('article');
+            article.className = 'project-item';
+            article.innerHTML = `
+              <div class="project-media">
+                <figure>
+                  <img src="${item.thumbnail}" alt="${item.title}">
+                </figure>
+              </div>
+              <div class="project-details">
+                <span class="badge">${item.category}</span>
+                <h2>${item.title}</h2>
+                <ul class="project-meta">
+                  <li><strong>Tahun:</strong> ${item.year}</li>
+                </ul>
+                <div class="project-description">
+                  <p>${item.excerpt}</p>
+                </div>
+              </div>
+            `;
+            projectsContainer.appendChild(article);
+          });
+        }
+      })
+      .catch(err => console.log('Portfolio JSON belum dimuat:', err));
+  }
+
+  // C. HALAMAN GALERI (gallery.html)
+  const gallerySection = document.querySelector('.grid-portrait, .grid-landscape, .gallery-preview-grid');
+  if (gallerySection && window.location.pathname.includes('gallery')) {
+    fetch('content/gallery.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.items && Array.isArray(data.items) && data.items.length > 0) {
+          gallerySection.innerHTML = '';
+          data.items.forEach(karya => {
+            const article = document.createElement('article');
+            article.className = 'gallery-card';
+            article.innerHTML = `
+              <figure class="card-media ${karya.aspect || 'aspect-vertical'}">
+                <img src="${karya.image}" alt="${karya.title}">
+              </figure>
+              <div class="card-caption">
+                <span class="card-tag">Arsip Visual</span>
+                <h3>${karya.title}</h3>
+                <p class="card-meta">${karya.year} · ${karya.medium}</p>
+                <p class="card-excerpt">${karya.description}</p>
+              </div>
+            `;
+            gallerySection.appendChild(article);
+          });
+          attachLightboxListeners(); // Pasang ulang event klik lightbox untuk data baru
+        }
+      })
+      .catch(err => console.log('Gallery JSON belum dimuat:', err));
+  }
+
+  // D. HALAMAN ABOUT (about.html)
+  if (window.location.pathname.includes('about')) {
+    fetch('content/about.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.title) {
+          const el = document.querySelector('#page-header h1');
+          if (el) el.textContent = data.title;
+        }
+        if (data.artist_image) {
+          const el = document.querySelector('.artist-portrait img');
+          if (el) el.src = data.artist_image;
+        }
+        if (data.bio) {
+          const el = document.querySelector('.about-content');
+          if (el) {
+            el.innerHTML = `
+              <section class="bio-block">
+                <h2>Biografi & Profil Profesional</h2>
+                <p>${data.bio}</p>
+              </section>
+              <section class="bio-block">
+                <h2>Pendekatan Artistik</h2>
+                <p>${data.statement || ''}</p>
+              </section>
+            `;
+          }
+        }
+      })
+      .catch(err => console.log('About JSON belum dimuat:', err));
+  }
+
+  // E. HALAMAN CV (cv.html)
   if (window.location.pathname.includes('cv')) {
-    fetch('/content/cv.json')
+    fetch('content/cv.json')
       .then(res => res.json())
       .then(data => {
         if (data.education) {
-          const edu = document.querySelector('.cv-education');
-          if (edu) edu.innerHTML = data.education;
+          // Anda bisa memetakan elemen CV sesuai kebutuhan section HTML Anda
         }
-        if (data.exhibitions) {
-          const ex = document.querySelector('.cv-exhibitions');
-          if (ex) ex.innerHTML = data.exhibitions;
-        }
-        if (data.publications) {
-          const pub = document.querySelector('.cv-publications');
-          if (pub) pub.innerHTML = data.publications;
-        }
-        if (data.experience) {
-          const exp = document.querySelector('.cv-experience');
-          if (exp) exp.innerHTML = data.experience;
+        if (data.cv_pdf) {
+          const btnPdf = document.querySelector('.cv-download-action a');
+          if (btnPdf) btnPdf.href = data.cv_pdf;
         }
       })
-      .catch(err => console.log('CMS CV belum ada data:', err));
+      .catch(err => console.log('CV JSON belum dimuat:', err));
   }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 1. TOGGLE MENU MOBILE
+  const menuBtn = document.querySelector('.menu-toggle-btn');
+  const siteNav = document.querySelector('.site-nav');
+  if (menuBtn && siteNav) {
+    menuBtn.addEventListener('click', () => siteNav.classList.toggle('is-open'));
+  }
+
+  // 2. SKRIP OTOMATIS PENARIK DATA CMS UNTUK SEMUA HALAMAN
+  const currentPath = window.location.pathname;
+
+  // A. HALAMAN HOME (index.html)
+  if (currentPath === '/' || currentPath.includes('index')) {
+    fetch('content/home.json').then(r => r.json()).then(data => {
+      if (data.title) document.querySelector('#hero h2').textContent = data.title;
+      if (data.subtitle) document.querySelector('#hero .tagline').textContent = data.subtitle;
+      if (data.about_summary) document.querySelector('#hero .description').innerHTML = data.about_summary.replace(/\n/g, '<br>');
+      if (data.hero_image) document.querySelector('#hero img').src = data.hero_image;
+    }).catch(e => console.log('CMS Home ready'));
+  }
+
+  // B. HALAMAN ABOUT (about.html)
+  if (currentPath.includes('about')) {
+    fetch('content/about.json').then(r => r.json()).then(data => {
+      if (data.artist_image) document.querySelector('.artist-portrait img').src = data.artist_image;
+      if (data.bio) document.querySelector('.about-content').innerHTML = `
+        <section class="bio-block">
+          <h2>Biografi & Profil Profesional</h2>
+          <p>${data.bio.replace(/\n/g, '</p><p>')}</p>
+        </section>
+        <section class="bio-block">
+          <h2>Pendekatan Artistik</h2>
+          <p>${(data.statement || '').replace(/\n/g, '</p><p>')}</p>
+        </section>
+      `;
+    }).catch(e => console.log('CMS About ready'));
+  }
+
+  // C. HALAMAN PORTOFOLIO (portfolio.html)
+  if (currentPath.includes('portfolio')) {
+    fetch('content/portfolio.json').then(r => r.json()).then(data => {
+      const container = document.getElementById('projects-container');
+      if (container && data.items) {
+        container.innerHTML = data.items.map(item => `
+          <article class="project-item">
+            <div class="project-media"><figure><img src="${item.thumbnail}" alt="${item.title}"></figure></div>
+            <div class="project-details">
+              <span class="badge">${item.category || 'Portfolio'}</span>
+              <h2>${item.title}</h2>
+              <ul class="project-meta"><li><strong>Tahun:</strong> ${item.year}</li></ul>
+              <div class="project-description"><p>${item.excerpt}</p></div>
+            </div>
+          </article><hr>
+        `).join('');
+      }
+    }).catch(e => console.log('CMS Portfolio ready'));
+  }
+
+  // D. HALAMAN GALERI (gallery.html)
+  if (currentPath.includes('gallery')) {
+    fetch('content/gallery.json').then(r => r.json()).then(data => {
+      const container = document.querySelector('.grid-portrait, .grid-landscape');
+      if (container && data.items) {
+        container.innerHTML = data.items.map(karya => `
+          <article class="gallery-card">
+            <figure class="card-media ${karya.aspect || 'aspect-vertical'}">
+              <img src="${karya.image}" alt="${karya.title}">
+            </figure>
+            <div class="card-caption">
+              <span class="card-tag">Arsip Visual</span>
+              <h3>${karya.title}</h3>
+              <p class="card-meta">${karya.year} · ${karya.medium}</p>
+              <p class="card-excerpt">${karya.description}</p>
+            </div>
+          </article>
+        `).join('');
+      }
+    }).catch(e => console.log('CMS Gallery ready'));
+  }
+
+  // E. HALAMAN CV (cv.html)
+  if (currentPath.includes('cv')) {
+    fetch('content/cv.json').then(r => r.json()).then(data => {
+      if (data.cv_pdf) {
+        const linkPdf = document.querySelector('.cv-download-action a');
+        if (linkPdf) linkPdf.href = data.cv_pdf;
+      }
+    }).catch(e => console.log('CMS CV ready'));
+  }
+
+});
 
 });
