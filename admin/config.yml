@@ -8,17 +8,17 @@ public_folder: "assets/images"
 
 collections:
   - label: "Halaman Utama"
-    name: "home"
+    name: "home_collection"
     files:
       - label: "Pengaturan Beranda & Etalase"
-        name: "home_data"
+        name: "home"
         file: "content/home.json"
         fields:
           - { label: "Judul Utama", name: "title", widget: "string", required: false }
           - { label: "Subjudul / Tagline", name: "subtitle", widget: "string", required: false }
           - { label: "Deskripsi Singkat", name: "description", widget: "text", required: false }
-          - { label: "Gambar Utama Samping Hero (Portrait 800x1000)", name: "hero_image", widget: "image", required: false }
-          - label: "Etalase 5 Karya di Bawah Beranda"
+          - { label: "1. Gambar Utama Samping Hero (Portrait)", name: "hero_image", widget: "image", required: false }
+          - label: "2. Etalase Karya Beranda"
             name: "showcase_items"
             widget: "list"
             summary: "{{fields.title}}"
@@ -28,7 +28,7 @@ collections:
                 name: "orientation"
                 widget: "select"
                 options:
-                  - { label: "Landscape (Layar Lebar 16:9 / 1200x675)", value: "landscape" }
+                  - { label: "Landscape (Layar Lebar)", value: "landscape" }
                   - { label: "Portrait (Tinggi)", value: "portrait" }
                   - { label: "Square (Persegi 1:1)", value: "square" }
                 default: "landscape"
@@ -37,13 +37,13 @@ collections:
               - { label: "Deskripsi (Opsional)", name: "description", widget: "text", required: false }
 
   - label: "Galeri Karya"
-    name: "gallery"
+    name: "gallery_collection"
     files:
       - label: "Daftar Karya Galeri"
-        name: "gallery_data"
+        name: "gallery"
         file: "content/gallery.json"
         fields:
-          - label: "Karya Galeri"
+          - label: "Daftar Karya"
             name: "items"
             widget: "list"
             summary: "{{fields.title}}"
@@ -60,27 +60,24 @@ collections:
               - label: "Orientasi / Format Grid"
                 name: "orientation"
                 widget: "select"
-                options:
-                  - { label: "Landscape", value: "landscape" }
-                  - { label: "Portrait", value: "portrait" }
-                  - { label: "Square", value: "square" }
+                options: ["landscape", "portrait", "square"]
                 default: "landscape"
               - { label: "Gambar Karya", name: "image", widget: "image" }
               - { label: "Deskripsi", name: "description", widget: "text", required: false }
 
   - label: "Portofolio Utama"
-    name: "portfolio"
+    name: "portfolio_collection"
     files:
       - label: "Daftar Proyek Portofolio"
-        name: "portfolio_data"
+        name: "portfolio"
         file: "content/portfolio.json"
         fields:
-          - label: "Proyek Portofolio"
+          - label: "Daftar Proyek"
             name: "items"
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Judul Proyek / Karya", name: "title", widget: "string" }
+              - { label: "Judul Proyek", name: "title", widget: "string" }
               - label: "Tahun"
                 name: "year"
                 widget: "select"
@@ -92,10 +89,7 @@ collections:
               - label: "Orientasi / Format Grid"
                 name: "orientation"
                 widget: "select"
-                options:
-                  - { label: "Landscape", value: "landscape" }
-                  - { label: "Portrait", value: "portrait" }
-                  - { label: "Square", value: "square" }
+                options: ["landscape", "portrait", "square"]
                 default: "landscape"
               - { label: "Gambar Karya / Cover", name: "image", widget: "image" }
               - { label: "Deskripsi Ringkas", name: "description", widget: "text", required: false }
