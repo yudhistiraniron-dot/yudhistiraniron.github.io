@@ -16,14 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// --- FUNGSI MENU NAVIGASI HP ---
+// --- FUNGSI MENU NAVIGASI HP (DIBERSIHKAN & DIPERTINGGI RESPONSIFNYA) ---
 function initMobileMenu() {
   const menuToggle = document.querySelector('.menu-toggle-btn') || document.querySelector('.menu-toggle');
   const navMenu = document.querySelector('.site-nav') || document.querySelector('.nav-menu');
 
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Menggunakan toggle 'is-open' dan 'active' agar cocok dengan semua aturan CSS
+      navMenu.classList.toggle('is-open');
       navMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+
+    // Menutup menu jika mengeklik di luar area navigasi
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('is-open');
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+      }
     });
   }
 }

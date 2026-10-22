@@ -1,14 +1,8 @@
 /* ==========================================================================
-   EFRAIM YUDHISTIRA NIRON — CLEAN MONOLINGUAL CSS (FULL REBUILT & PINTEREST MASONRY)
+   EFRAIM YUDHISTIRA NIRON — CLEAN MONOLINGUAL CSS (FIXED MOBILE & PROPORTIONAL IMAGES)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
-
-/* Memastikan elemen navigasi dan tombol selalu interaktif */
-.menu-toggle, .hamburger, nav {
-  z-index: 9999 !important;
-  pointer-events: auto !important;
-}
 
 :root {
   /* PALET WARNA EDITORIAL */
@@ -135,7 +129,7 @@ p {
 header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10000;
   background-color: var(--bg-header);
   border-bottom: 1px solid var(--color-accent-gold);
   padding: 1.25rem 2rem;
@@ -196,7 +190,7 @@ header {
   width: 100%;
 }
 
-.menu-toggle-btn {
+.menu-toggle-btn, .menu-toggle {
   display: none;
   background: none;
   border: 1px solid var(--border-sand-muted);
@@ -206,10 +200,12 @@ header {
   font-size: 0.85rem;
   cursor: pointer;
   border-radius: var(--radius-sm);
+  z-index: 10001 !important;
+  pointer-events: auto !important;
 }
 
 /* ==========================================================================
-   2. HERO & PORTFOLIO LAYOUTS
+   2. HERO & PORTFOLIO LAYOUTS (PENCEGAHAN FOTO PROFIL KETARIK / GEPENG)
    ========================================================================== */
 #hero {
   display: grid;
@@ -239,7 +235,8 @@ header {
 .gallery-preview-grid figure,
 .about-sidebar .artist-portrait,
 .project-media figure,
-#home-about {
+#home-about,
+.home-about-avatar figure {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-sand-muted);
   transition: border-color 0.3s ease;
@@ -251,8 +248,24 @@ header {
   border-color: var(--color-accent-gold);
 }
 
-.hero-featured-image figure { padding: 0.75rem; }
-.hero-featured-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+/* DIPERBAIKI: Menjaga rasio foto profil / hero tetap natural tanpa terdistorsi */
+.hero-featured-image figure,
+.about-sidebar .artist-portrait,
+.home-about-avatar figure { 
+  padding: 0.75rem; 
+  overflow: hidden;
+}
+
+.hero-featured-image img,
+.about-sidebar .artist-portrait img,
+.home-about-avatar figure img { 
+  width: 100%; 
+  height: auto; 
+  max-height: 520px;
+  object-fit: cover; 
+  object-position: center top; 
+  display: block;
+}
 
 figcaption {
   font-size: 0.85rem;
@@ -329,9 +342,8 @@ figcaption {
   padding: 2.5rem 1.5rem;
 }
 
-/* Menggunakan CSS Columns untuk mengalirkan vertikal tanpa jeda kosong */
 .gallery-flexible-grid {
-  column-count: 3;          /* 3 Kolom di layar besar/laptop */
+  column-count: 3;
   column-gap: 1.5rem;
   width: 100%;
 }
@@ -341,12 +353,12 @@ figcaption {
   border: 1px solid var(--border-sand-muted);
   border-radius: var(--radius-sm);
   padding: 1rem;
-  margin-bottom: 1.5rem;     /* Jarak vertikal antar kartu */
-  display: inline-block;     /* Mencegah kartu terbelah antar kolom */
+  margin-bottom: 1.5rem;
+  display: inline-block;
   width: 100%;
   cursor: pointer;
   transition: border-color 0.3s ease, transform 0.3s ease;
-  break-inside: avoid;       /* Kunci masonry: kartu tidak boleh terpotong kolom */
+  break-inside: avoid;
 }
 
 .gallery-card:hover {
@@ -362,7 +374,6 @@ figcaption {
   margin-bottom: 0.85rem;
 }
 
-/* Menjaga proporsi asli gambar secara utuh (landscape, portrait, square) */
 .gallery-card img {
   width: 100%;
   height: auto;
@@ -379,7 +390,6 @@ figcaption {
   color: var(--color-warm-ivory);
 }
 
-/* Deskripsi dipotong 1 baris dengan titik-titik (...) */
 .card-info .single-line-excerpt {
   font-size: 0.85rem;
   color: var(--color-sand);
@@ -528,7 +538,6 @@ footer a:hover {
 
 #home-about { padding: 3.5rem; margin: 4.5rem 0; }
 .home-about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 3.5rem; align-items: center; }
-.home-about-avatar figure { padding: 0.5rem; background-color: var(--bg-deep-charcoal); border: 1px solid var(--border-sand-muted); }
 
 .portfolio-info-grid {
   display: grid;
@@ -560,11 +569,11 @@ footer a:hover {
 
 
 /* ==========================================================================
-   7. RESPONSIVE DESIGN (TABLET & MOBILE)
+   7. RESPONSIVE DESIGN (RESPONSIF HP & NAVIGATION SLIDE-DOWN)
    ========================================================================== */
 @media (max-width: 1024px) {
   .gallery-flexible-grid {
-    column-count: 2; /* 2 Kolom untuk layar tablet */
+    column-count: 2;
   }
 }
 
@@ -583,7 +592,7 @@ footer a:hover {
   header {
     position: sticky !important;
     top: 0 !important;
-    z-index: 1000 !important;
+    z-index: 10000 !important;
     padding: 0.75rem 1rem !important;
   }
   
@@ -609,11 +618,13 @@ footer a:hover {
     background-color: var(--bg-header);
     border-bottom: 1px solid var(--color-accent-gold);
     padding: 1.5rem;
-    z-index: 99999;
+    z-index: 99999 !important;
     box-shadow: 0 10px 25px rgba(0,0,0,0.8);
   }
 
-  .site-nav.is-open {
+  /* DIPERBAIKI: Mengakomodasi penambahan class 'is-open' dan 'active' dari JavaScript */
+  .site-nav.is-open,
+  .site-nav.active {
     display: block !important;
   }
 
@@ -624,12 +635,12 @@ footer a:hover {
     align-items: flex-start;
   }
 
-  .menu-toggle-btn {
+  .menu-toggle-btn, .menu-toggle {
     display: block !important;
   }
 
   .gallery-flexible-grid {
-    column-count: 1; /* 1 Kolom mengalir rapi untuk HP */
+    column-count: 1;
   }
   
   .cv-item { 
@@ -639,7 +650,7 @@ footer a:hover {
 }
 
 @media (min-width: 601px) {
-  .menu-toggle-btn {
+  .menu-toggle-btn, .menu-toggle {
     display: none !important;
   }
   .site-nav {
