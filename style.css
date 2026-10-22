@@ -484,6 +484,110 @@ footer li { margin-bottom: 0.4rem; font-size: 0.825rem; }
 
   /* mediapunya */
 
+  /* --- TAMPILAN GALERI UTAMA --- */
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- TAMPILAN HP (MOBILE DEFAULT: 1 KOLOM) --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Scrolling 1 per 1 di HP */
+  gap: 1.5rem;
+}
+
+.gallery-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+  /* Base Container */
+  .gallery-container {
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* DEFAULT MOBILE (HP): Scrolling 1 Per 1 */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .card-info {
+    padding: 0.5rem 0;
+  }
+
+  .card-info h3 {
+    margin: 0.5rem 0 0.2rem;
+    font-size: 1.1rem;
+  }
+
+  .card-info .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* TAMPILAN LAPTOP / PC (Desktop Layout) */
+  @media (min-width: 1024px) {
+    /* Landscape: 2 Kolom */
+    .gallery-grid.landscape-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Square (1:1): 4 Kolom */
+    .gallery-grid.square-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Portrait: 4 Kolom */
+    .gallery-grid.portrait-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+/* --- TAMPILAN PC / LAPTOP (RESPONSIVE DEKSTOP) --- */
+@media (min-width: 1024px) {
+  /* Grid khusus karya LANDSCAPE: 2 Kolom */
+  .gallery-grid.landscape-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Grid khusus karya SQUARE (1:1): 4 Kolom */
+  .gallery-grid.square-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Grid khusus karya PORTRAIT: 4 Kolom */
+  .gallery-grid.portrait-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .portfolio-info-grid {
     grid-template-columns: 1fr;

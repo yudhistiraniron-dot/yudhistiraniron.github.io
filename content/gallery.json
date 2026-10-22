@@ -55,6 +55,18 @@
       "description": "Instalasi multimedia ini memadukan relief bertekstur kasar, miniatur gubuk, dan papan arsip terhubung benang merah untuk mengupas narasi keterpinggiran sosial. Karya ini menghadirkan ruang refleksi kritis yang membongkar realitas ketimpangan dan jejak kemanusiaan yang kerap terabaikan.",
       "orientation": "landscape",
       "badge": "Social Critique"
+    },
+    {
+      "id": "caritas-dan-jery",
+      "image": "assets/images/caritas dan jery.jpeg",
+      "title": "Caritas dan Jery",
+      "ai_title_suggestion": "Di Balik Simbol Ketimpangan",
+      "description": "Interpretasi dasar otomatis dari Gemini AI...",
+      "orientation": "portrait",
+      "badge": "Social Critique",
+      "in_portfolio": false,
+      "curator_notes": "",
+      "featured_order": 0
     }
   ]
 }

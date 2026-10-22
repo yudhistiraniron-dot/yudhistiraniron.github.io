@@ -98,4 +98,68 @@ async function loadHomeData() {
   } catch (error) {
     console.error("Gagal memuat data home.json:", error);
   }
+  document.addEventListener("DOMContentLoaded", () => {
+  
+  // --- 1. LOGIKA MENU NAVIGASI MOBILE (HP) ---
+  const menuToggle = document.querySelector('.menu-toggle'); // Sesuaikan class tombol menu Anda
+  const navMenu = document.querySelector('.nav-menu');       // Sesuaikan class kontainer menu Anda
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  }
+
+  // --- 2. LOGIKA PEMUATAN GALERI KARYA ---
+  const galleryWrapper = document.getElementById('gallery-wrapper');
+
+  // Jalankan logika galeri HANYA jika halaman memiliki elemen #gallery-wrapper
+  if (galleryWrapper) {
+    fetch('content/gallery.json')
+      .then(response => response.json())
+      .then(data => {
+        galleryWrapper.innerHTML = ''; // Bersihkan kontainer
+
+        // Filter unik berdasarkan ID agar tidak ada duplikasi
+        const uniqueItems = Array.from(new Map(data.items.map(item => [item.id, item])).values());
+
+        const landscapeItems = uniqueItems.filter(item => item.orientation === 'landscape');
+        const squareItems = uniqueItems.filter(item => item.orientation === 'square');
+        const portraitItems = uniqueItems.filter(item => item.orientation === 'portrait');
+
+        function renderGroup(items, gridClass, titleText) {
+          if (items.length === 0) return;
+
+          const section = document.createElement('section');
+          section.className = 'gallery-section';
+          
+          let html = `<div class="gallery-grid ${gridClass}">`;
+          
+          items.forEach(item => {
+            html += `
+              <div class="gallery-card" id="${item.id}">
+                <div class="img-wrapper">
+                  <img src="${item.image}" alt="${item.title}" loading="lazy">
+                </div>
+                <div class="card-info">
+                  <h3>${item.ai_title_suggestion || item.title}</h3>
+                  <span class="badge">${item.badge}</span>
+                  <p>${item.description}</p>
+                </div>
+              </div>
+            `;
+          });
+
+          html += `</div>`;
+          section.innerHTML = html;
+          galleryWrapper.appendChild(section);
+        }
+
+        renderGroup(landscapeItems, 'landscape-grid', 'Landscape Works');
+        renderGroup(squareItems, 'square-grid', 'Square Works');
+        renderGroup(portraitItems, 'portrait-grid', 'Portrait Works');
+      })
+      .catch(err => console.error("Gagal memuat galeri:", err));
+  }
+});
 }
