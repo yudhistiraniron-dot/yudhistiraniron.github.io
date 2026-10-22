@@ -1,3 +1,9 @@
+# Mengabaikan file rahasia dan skrip lokal
 .env
+bash.txt
+desktop.ini
 generate_with_ai.py
-generate_with_ai.py
+generate.html
+
+# Boleh di-uncomment jika update.sh juga tidak ingin di-push:
+# update.sh
