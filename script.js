@@ -2,9 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. Inisialisasi Navigasi Mobile (HP)
   initMobileMenu();
 
-  // 2. Jalankan pemuatan data sesuai kontainer yang ada di halaman
+  // 2. Jalankan pemuatan data sesuai kontainer halaman yang aktif
   if (document.getElementById("gallery-wrapper") || document.getElementById("gallery-container")) {
     loadGalleryData();
+  }
+
+  if (document.getElementById("projects-container")) {
+    loadPortfolioData();
   }
 
   if (document.querySelector("#hero")) {
@@ -24,7 +28,7 @@ function initMobileMenu() {
   }
 }
 
-// --- FUNGSI LOAD GALLERY (gallery.html) - MUAT SEMUA & MODAL POP-UP ---
+// --- FUNGSI LOAD GALLERY (gallery.html) ---
 async function loadGalleryData() {
   const galleryWrapper = document.getElementById('gallery-wrapper') || document.getElementById('gallery-container');
   if (!galleryWrapper) return;
@@ -36,7 +40,7 @@ async function loadGalleryData() {
     if (!response.ok) throw new Error('Gagal mengambil file gallery.json');
 
     const data = await response.json();
-    galleryWrapper.innerHTML = ''; // Bersihkan loader
+    galleryWrapper.innerHTML = '';
 
     const rawItems = data.items || data;
     if (!rawItems || rawItems.length === 0) {
@@ -44,10 +48,7 @@ async function loadGalleryData() {
       return;
     }
 
-    // FILTER ADMIN: Hanya sembunyikan jika is_visible == false
     const visibleItems = rawItems.filter(item => item.is_visible !== false);
-
-    // Pastikan semua entri unik berdasarkan ID atau Jalur Gambar
     const uniqueItems = Array.from(new Map(visibleItems.map(item => [item.id || item.image, item])).values());
 
     const gridContainer = document.createElement('div');
@@ -70,7 +71,6 @@ async function loadGalleryData() {
         </div>
       `;
 
-      // Event listener saat kartu diklik untuk membuka bacaan lengkap
       card.addEventListener('click', () => {
         openGalleryModal(item, displayTitle);
       });
@@ -83,6 +83,73 @@ async function loadGalleryData() {
   } catch (err) {
     console.error("Gagal memuat galeri:", err);
     galleryWrapper.innerHTML = `<p style="text-align:center; color:red; padding:2rem;">Gagal memuat arsip karya.</p>`;
+  }
+}
+
+// --- FUNGSI LOAD PORTFOLIO OTOMATIS (portfolio.html) ---
+async function loadPortfolioData() {
+  const projectsContainer = document.getElementById('projects-container');
+  if (!projectsContainer) return;
+
+  projectsContainer.innerHTML = '<p style="text-align:center; padding:2rem; color: var(--color-sand);">Memuat proyek portofolio...</p>';
+
+  try {
+    const response = await fetch('content/gallery.json');
+    if (!response.ok) throw new Error('Gagal mengambil file gallery.json');
+
+    const data = await response.json();
+    const items = data.items || [];
+
+    // Hanya ambil karya yang dicentang in_portfolio: true dan aktif (is_visible)
+    const portfolioItems = items.filter(item => item.in_portfolio === true && item.is_visible !== false);
+
+    if (portfolioItems.length === 0) {
+      projectsContainer.innerHTML = '<p style="color: var(--color-sand); padding: 2rem 0; text-align:center;">Belum ada proyek pilihan yang dimasukkan ke Portofolio.</p>';
+      return;
+    }
+
+    let html = '';
+    portfolioItems.forEach((item, index) => {
+      const client = item.client || 'Proyek Mandiri / Riset Visual';
+      const year = item.year || '2026';
+      const role = item.role || 'Visual Artist / Illustrator';
+      const medium = item.medium || 'Digital Drawing / Mixed Technique';
+      const description = item.description || 'Studi kasus dan dokumentasi eksplorasi karya visual.';
+      const displayTitle = item.title || 'Tanpa Judul';
+
+      html += `
+        <article class="project-item" id="project-${item.id}">
+          <div class="project-media">
+            <figure>
+              <img src="${item.image}" alt="${displayTitle}" loading="lazy">
+            </figure>
+          </div>
+
+          <div class="project-details">
+            <span class="badge">${item.badge || 'Portfolio Project'}</span>
+            <h2>${displayTitle}</h2>
+            
+            <ul class="project-meta">
+              <li><strong>Klien / Media:</strong> ${client}</li>
+              <li><strong>Tahun:</strong> ${year}</li>
+              <li><strong>Peran:</strong> ${role}</li>
+              <li><strong>Medium:</strong> ${medium}</li>
+            </ul>
+
+            <div class="project-description">
+              <p>${description}</p>
+            </div>
+          </div>
+        </article>
+        ${index < portfolioItems.length - 1 ? '<hr>' : ''}
+      `;
+    });
+
+    projectsContainer.innerHTML = html;
+
+  } catch (err) {
+    console.error("Gagal memuat portofolio:", err);
+    projectsContainer.innerHTML = `<p style="text-align:center; color:red; padding:2rem;">Gagal memuat data portofolio.</p>`;
   }
 }
 
@@ -116,9 +183,8 @@ function openGalleryModal(item, title) {
   `;
 
   modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // Kunci scroll halaman saat modal buka
+  document.body.style.overflow = 'hidden';
 
-  // Tutup jika area luar modal diklik
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeGalleryModal();
   });
@@ -131,7 +197,6 @@ function closeGalleryModal() {
     document.body.style.overflow = 'auto';
   }
 }
- 
 
 // --- FUNGSI LOAD HOME (index.html) ---
 async function loadHomeData() {
