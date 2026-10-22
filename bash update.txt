@@ -1,0 +1,13 @@
+Setiap kali Anda selesai mengedit kode di komputer atau ingin memperbarui situs di lain hari, Anda cukup menjalankan satu baris perintah saja di terminal:
+
+bash update.sh
+
+Terjadi Konflik Kode (CONFLICT) saat git pull. Buka file yang konflik di VS Code, tentukan bagian kode mana yang ingin dipertahankan (terbiasa dengan pilihan Accept Current Change atau Accept Incoming Change):
+
+git add .
+git rebase --continue
+bash update.sh
+
+
+Ingin Membatalkan Proses Rebase yang Macet
+Jika Anda merasa kebingungan di tengah proses pull/rebase, Anda bisa membatalkannya secara total kembali ke kondisi aman dengan perintah:

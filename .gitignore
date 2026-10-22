@@ -1,6 +1,6 @@
 # Mengabaikan file rahasia dan skrip lokal
 .env
-bash.txt
+bash update.sh
 desktop.ini
 generate_with_ai.py
 generate.html
