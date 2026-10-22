@@ -3,10 +3,11 @@ backend:
   repo: yudhistiraniron-dot/yudhistiraniron.github.io
   branch: main
 
-media_folder: "assets/images"
-public_folder: "assets/images"
+media_folder: "KARYA"
+public_folder: "KARYA"
 
 collections:
+  # 1. PENGATURAN BERANDA
   - label: "Halaman Utama"
     name: "home_pages"
     files:
@@ -35,3 +36,61 @@ collections:
               - { label: "File Gambar", name: "image", widget: "image" }
               - { label: "Kategori / Badge (Opsional)", name: "badge", widget: "string", required: false }
               - { label: "Deskripsi (Opsional)", name: "description", widget: "text", required: false }
+
+  # 2. ARSIP GALERI & PORTOFOLIO (UNTUK CENTANG PORTOFOLIO DARI GALERI)
+  - label: "Arsip Galeri & Portofolio"
+    name: "gallery_management"
+    files:
+      - label: "Kelola Daftar Karya"
+        name: "gallery_entry"
+        file: "content/gallery.json"
+        fields:
+          - label: "Daftar Karya"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} (Portfolio: {{fields.in_portfolio}})"
+            fields:
+              - { label: "ID Unik", name: "id", widget: "string" }
+              - { label: "File Gambar", name: "image", widget: "image" }
+              - { label: "Judul Karya", name: "title", widget: "string" }
+              - { label: "Deskripsi / Narasi Lengkap", name: "description", widget: "text", required: false }
+              - label: "Orientasi Grid"
+                name: "orientation"
+                widget: "select"
+                options:
+                  - { label: "Landscape", value: "landscape" }
+                  - { label: "Portrait", value: "portrait" }
+                  - { label: "Square", value: "square" }
+                default: "landscape"
+              - { label: "Badge / Kategori", name: "badge", widget: "string", default: "Artwork" }
+              - { label: "Tampilkan di Galeri Web?", name: "is_visible", widget: "boolean", default: true }
+              
+              # --- OPSI CENTANG PORTOFOLIO & DETAILNYA ---
+              - { label: "Masuk ke Portofolio?", name: "in_portfolio", widget: "boolean", default: false, hint: "Centang ini agar karya otomatis muncul di portfolio.html" }
+              - { label: "Klien / Media", name: "client", widget: "string", required: false, hint: "Contoh: Floresa.co" }
+              - { label: "Tahun Proyek", name: "year", widget: "string", required: false, hint: "Contoh: 2025 - 2026" }
+              - { label: "Peran", name: "role", widget: "string", required: false, hint: "Contoh: Illustrator & Co-Researcher" }
+              - { label: "Medium", name: "medium", widget: "string", required: false, hint: "Contoh: Digital Drawing / Mixed Technique" }
+
+  # 3. HALAMAN ABOUT
+  - label: "Halaman About"
+    name: "about_page"
+    files:
+      - label: "Edit Profil & Artist Statement"
+        name: "about_entry"
+        file: "content/about.json"
+        fields:
+          - { label: "Judul Halaman", name: "title", widget: "string", required: false }
+          - { label: "Foto Profil Utama", name: "profile_image", widget: "image", required: false }
+          - { label: "Isi Teks / Biografi / Artist Statement", name: "content", widget: "markdown", required: false }
+
+  # 4. HALAMAN CV
+  - label: "Halaman CV"
+    name: "cv_page"
+    files:
+      - label: "Edit Riwayat Hidup / CV"
+        name: "cv_entry"
+        file: "content/cv.json"
+        fields:
+          - { label: "Judul CV", name: "title", widget: "string", required: false }
+          - { label: "Isi / Riwayat Pameran & Pendidikan", name: "content", widget: "markdown", required: false }
