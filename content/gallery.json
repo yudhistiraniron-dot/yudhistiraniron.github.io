@@ -154,6 +154,23 @@
       "featured_order": 0
     },
     {
+      "id": "moke",
+      "image": "KARYA/MOKE.jpg",
+      "title": "Moke",
+      "ai_title_suggestion": "",
+      "description": "",
+      "orientation": "landscape",
+      "badge": "Artwork",
+      "is_visible": true,
+      "in_portfolio": false,
+      "client": "",
+      "year": "2026",
+      "role": "Illustrator & Visual Artist",
+      "medium": "Digital Drawing / Mixed Technique",
+      "curator_notes": "",
+      "featured_order": 0
+    },
+    {
       "id": "mbaru-gendang",
       "image": "KARYA/Mbaru Gendang.png",
       "title": "Mbaru Gendang",
@@ -681,23 +698,6 @@
       "featured_order": 0
     },
     {
-      "id": "mok3-mana-moke-2",
-      "image": "KARYA/mok3 mana moke 2.jpg",
-      "title": "Mok3 Mana Moke 2",
-      "description": "",
-      "orientation": "landscape",
-      "badge": "Artwork",
-      "is_visible": true,
-      "in_portfolio": false,
-      "client": "",
-      "year": "",
-      "role": "",
-      "medium": "",
-      "ai_title_suggestion": "",
-      "curator_notes": "",
-      "featured_order": 0
-    },
-    {
       "id": "musik-kmpung",
       "image": "KARYA/musik kmpung.png",
       "title": "Musik Kmpung",
@@ -847,6 +847,23 @@
       "role": "",
       "medium": "",
       "ai_title_suggestion": "",
+      "curator_notes": "",
+      "featured_order": 0
+    },
+    {
+      "id": "tentara",
+      "image": "KARYA/tentara.png",
+      "title": "Tentara",
+      "ai_title_suggestion": "",
+      "description": "",
+      "orientation": "landscape",
+      "badge": "Artwork",
+      "is_visible": true,
+      "in_portfolio": false,
+      "client": "",
+      "year": "2026",
+      "role": "Illustrator & Visual Artist",
+      "medium": "Digital Drawing / Mixed Technique",
       "curator_notes": "",
       "featured_order": 0
     },
